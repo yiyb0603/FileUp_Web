@@ -1,0 +1,34 @@
+$ROBOTO_URL: '../../assets/fonts/Roboto/Roboto';
+
+@mixin font_face($name, $url) {
+	font-family: $name;
+	font-display: block; // 웹 폰트 로딩처리
+	src: url($url + '.ttf') format('truetype');
+}
+
+$ROBOTO_THIN: 'Roboto Thin';
+$ROBOTO_LIGHT: 'Roboto Light';
+$ROBOTO_REGULAR: 'Roboto Regular';
+$ROBOTO_MEDIUM: 'Roboto Medium';
+$ROBOTO_SEMIBOLD: 'Roboto SemiBold';
+$ROBOTO_BOLD: 'Roboto Bold';
+$NOTO-SANS_BLACK: 'Roboto Black';
+
+@font-face {
+	@include font_face($ROBOTO_THIN, $ROBOTO_URL + '-Thin');
+}
+@font-face {
+	@include font_face($ROBOTO_LIGHT, $ROBOTO_URL + '-Light');
+}
+@font-face {
+	@include font_face($ROBOTO_REGULAR, $ROBOTO_URL + '-Regular');
+}
+@font-face {
+	@include font_face($ROBOTO_MEDIUM, $ROBOTO_URL + '-Medium');
+}
+@font-face {
+	@include font_face($ROBOTO_BOLD, $ROBOTO_URL + '-Bold');
+}
+@font-face {
+	@include font_face($NOTO-SANS_BLACK, $ROBOTO_URL + '-Black');
+}

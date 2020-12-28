@@ -1,0 +1,17 @@
+@import 'styles/Palette/Palette.scss';
+
+.BlankButton {
+	width: 110px;
+	height: 45px;
+	background-color: $white;
+	color: $main;
+	border: 1px solid $main;
+	border-radius: 25px;
+	font-size: 14px;
+	outline: none;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
