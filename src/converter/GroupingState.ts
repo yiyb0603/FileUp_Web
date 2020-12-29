@@ -1,14 +1,14 @@
 const groupingState = (
 	name: string,
 	hookS: any,
-	setHookS: (arg1: any) => void
+	changeHookS: (arg1: any) => void
 ) => {
-	const nameSet: string = 'set' + (name.charAt(0).toUpperCase() + name.slice(1));
+	const nameSet: string = 'onChange' + (name.charAt(0).toUpperCase() + name.slice(1));
 
-	const objData: any = new Object();
+	const objData: any = {};
 
 	objData[`${name}`] = hookS;
-	objData[`${nameSet}`] = setHookS;
+	objData[`${nameSet}`] = changeHookS;
 
 	return objData;
 };

@@ -23,7 +23,7 @@ export const Palette: IPaletteTypes = {
 	yellow: '#f1c40f',
 	green: '#27ae60',
 	blue: '#0984e3',
-	skyBlue: '#00a8ff',
+	skyBlue: '#75A4F5',
 	indigo: '#192a56',
 	purple: '#6c5ce7',
 	mint: '#00d2d3',

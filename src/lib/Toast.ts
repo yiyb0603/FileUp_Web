@@ -1,17 +1,17 @@
-import cogoToast from 'cogo-toast';
+import { toast } from 'react-toastify';
 
 export const successToast = (message: string): void => {
-  cogoToast.success(message);
+  toast.success(message);
 }
 
 export const errorToast = (message: string): void => {
-  cogoToast.error(message);
+  toast.error(message);
 }
 
 export const warningToast = (message: string): void => {
-  cogoToast.warn(message);
+  toast.warn(message);
 }
 
 export const infoToast = (message: string): void => {
-  cogoToast.info(message);
+  toast.info(message);
 }
