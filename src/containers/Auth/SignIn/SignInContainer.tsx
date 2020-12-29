@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import React, { useState, useCallback, ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { observer } from 'mobx-react';
 import SignIn from 'components/Auth/SignIn';
 import groupingState from 'converter/GroupingState';
@@ -12,14 +12,25 @@ const SignInContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const onRegister = useCallback(() => {
+  // setState Anonymous function optimization
+  const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setEmail(value);
+  }, [setEmail]);
+
+  const onChangePassword = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setPassword(value);
+  }, [setPassword]);
+
+  const onRegister = useCallback((): void => {
     setPageType(authPageType.REGISTER);
   }, [setPageType]);
 
   return (
     <SignIn
-      emailObject={groupingState('email', email, setEmail)}
-      passwordObject={groupingState('password', password, setPassword)}
+      emailObject={groupingState('email', email, onChangeEmail)}
+      passwordObject={groupingState('password', password, onChangePassword)}
       onRegister={onRegister}
     />
   );

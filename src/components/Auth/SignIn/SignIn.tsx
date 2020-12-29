@@ -1,4 +1,4 @@
-import React, { useCallback, ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, { ChangeEvent } from "react";
 import classNames from 'classnames';
 import { ClassNamesFn } from "classnames/types";
 import AuthInput from "components/Common/Auth/AuthInput";
@@ -11,30 +11,20 @@ const cx: ClassNamesFn = classNames.bind(style);
 interface SignInProps {
   emailObject: {
     email: string;
-    setEmail: Dispatch<SetStateAction<string>>;
+    onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 
   passwordObject: {
     password: string;
-    setPassword: Dispatch<SetStateAction<string>>;
+    onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 
   onRegister: () => void;
 };
 
-const SignIn = ({ emailObject, passwordObject, onRegister }: SignInProps) => {
-  const { email, setEmail } = emailObject;
-  const { password, setPassword } = passwordObject;
-
-  const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setEmail(value);
-  }, [setEmail]);
-
-  const onChangePassword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword(value);
-  }, [setPassword]);
+const SignIn = ({ emailObject, passwordObject, onRegister }: SignInProps): JSX.Element => {
+  const { email, onChangeEmail } = emailObject;
+  const { password, onChangePassword } = passwordObject;
 
   return (
     <div className={cx('SignIn')}>

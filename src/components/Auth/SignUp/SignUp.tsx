@@ -1,7 +1,6 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useCallback } from "react";
+import React, { ChangeEvent } from "react";
 import classNames from 'classnames';
 import { ClassNamesFn } from "classnames/types";
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 import AuthInput from "components/Common/Auth/AuthInput";
 import BlankButton from "components/Common/Auth/BlankButton";
 import AuthButton from "components/Common/Auth/AuthButton";
@@ -12,52 +11,32 @@ const cx: ClassNamesFn = classNames.bind(style);
 interface SignUpProps {
   emailObject: {
     email: string;
-    setEmail: Dispatch<SetStateAction<string>>;
+    onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 
   codeObject: {
     code: string;
-    setCode: Dispatch<SetStateAction<string>>;
+    onChangeCode: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 
   passwordObject: {
     password: string;
-    setPassword: Dispatch<SetStateAction<string>>;
+    onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 
   nicknameObject: {
     nickname: string;
-    setNickname: Dispatch<SetStateAction<string>>;
+    onChangeNickname: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 
   onBackPage: () => void;
 }
 
 const SignUp = ({ emailObject, codeObject, passwordObject, nicknameObject, onBackPage }: SignUpProps): JSX.Element => {
-  const { email, setEmail } = emailObject;
-  const { code, setCode } = codeObject;
-  const { password, setPassword } = passwordObject;
-  const { nickname, setNickname } = nicknameObject;
-
-  const onChangeEmail = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setEmail(value);
-  }, [setEmail]);
-
-  const onChangeCode = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setCode(value);
-  }, [setCode]);
-
-  const onChangePassword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword(value);
-  }, [setPassword]);
-
-  const onChangeName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setNickname(value);
-  }, [setNickname]);
+  const { email, onChangeEmail } = emailObject;
+  const { code, onChangeCode } = codeObject;
+  const { password, onChangePassword } = passwordObject;
+  const { nickname, onChangeNickname } = nicknameObject;
 
   return (
     <div className={cx('SignUp')}>
@@ -72,17 +51,17 @@ const SignUp = ({ emailObject, codeObject, passwordObject, nicknameObject, onBac
       
       <div className={cx('SignUp-Section')}>
         <div className={cx('SignUp-Section-Title')}>이메일 인증</div>
-        <AuthInput type="email" placeholder="인증번호를 입력해주세요" value={code} onChange={onChangeCode} />
+        <AuthInput type="text" placeholder="인증번호를 입력해주세요" value={code} onChange={onChangeCode} />
       </div>
 
       <div className={cx('SignUp-Section')}>
         <div className={cx('SignUp-Section-Title')}>비밀번호 (10자 ~ 25자 이내)</div>
-        <AuthInput type="email" placeholder="비밀번호를 입력해주세요" value={password} onChange={onChangePassword} />
+        <AuthInput type="password" placeholder="비밀번호를 입력해주세요" value={password} onChange={onChangePassword} />
       </div>
 
       <div className={cx('SignUp-Section')}>
         <div className={cx('SignUp-Section-Title')}>닉네임 (1자 ~ 16자 이내)</div>
-        <AuthInput type="email" placeholder="닉네임을 입력해주세요" value={nickname} onChange={onChangeName} />
+        <AuthInput type="text" placeholder="닉네임을 입력해주세요" value={nickname} onChange={onChangeNickname} />
       </div>
 
       <AuthButton onClick={() => {}}>회원가입</AuthButton>
