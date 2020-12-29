@@ -1,13 +1,13 @@
 @import 'styles/Palette/Palette.scss';
 
 .BlankButton {
-	width: 110px;
-	height: 45px;
+	width: 90px;
+	height: 40px;
 	background-color: $white;
 	color: $main;
 	border: 1px solid $main;
 	border-radius: 25px;
-	font-size: 14px;
+	font-size: 12px;
 	outline: none;
 	display: flex;
 	display: -webkit-flex;

@@ -8,7 +8,7 @@ export const getResponse = async (
 	try {
 		const { data }: AxiosResponse = await axios.get(`${SERVER}${url}`, {
 			headers: token && {
-				'ylog-token': token,
+				token,
 			},
 		});
 		return data;
@@ -28,7 +28,7 @@ export const postRequest = async (
 			request,
 			{
 				headers: token && {
-					'ylog-token': token,
+					token,
 				},
 			}
 		);
@@ -49,7 +49,7 @@ export const modifyRequest = async (
 			request,
 			{
 				headers: token && {
-					'ylog-token': token,
+					token,
 				},
 			}
 		);
@@ -63,7 +63,7 @@ export const deleteRequest = async (url: string, token?: string | null) => {
 	try {
 		const { data }: AxiosResponse = await axios.delete(`${SERVER}${url}`, {
 			headers: token && {
-				'ylog-token': token,
+				token,
 			},
 		});
 		return data;

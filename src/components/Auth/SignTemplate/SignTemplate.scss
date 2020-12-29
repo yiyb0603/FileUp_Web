@@ -15,10 +15,14 @@
 	@include setFlexStyle();
 
 	&-Contents {
-		min-width: 400px;
+		min-width: 380px;
 		padding: 10px 0;
 		margin: auto;
 		@include setFlexStyle();
 		justify-content: center;
+
+		&-Logo {
+			height: 100px;
+		}
 	}
 }
