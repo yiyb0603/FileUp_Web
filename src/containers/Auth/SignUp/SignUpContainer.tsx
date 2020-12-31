@@ -7,9 +7,9 @@ import { authPageType } from 'enum/PageType';
 import useStores from 'lib/hooks/useStores';
 import { SignUpDto } from 'util/types/dto/Auth.dto';
 import { emailValidation, signUpValidation } from 'validation/Auth/AuthValidation';
-import { IResponse } from 'util/types/Response';
+import { IError, IResponse } from 'util/types/Response';
 import { successToast } from 'lib/Toast';
-import { signUpError } from 'Error/Auth/AuthError';
+import AuthError from 'Error/Auth/AuthError';
 
 interface PropTypes {
   setPageType: Dispatch<SetStateAction<authPageType>>;
@@ -17,7 +17,7 @@ interface PropTypes {
 
 const SignUpContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
   const { store } = useStores();
-  const { handleSignUp, handleSendEmail, authLoading, emailLoading } = store.AuthStore;
+  const { handleSignUp, handleSendEmail, isLoading, emailLoading } = store.AuthStore;
 
   const [email, setEmail] = useState<string>('');
   const [code, setCode] = useState<string>('');
@@ -56,45 +56,46 @@ const SignUpContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
   }, [setPageType]);
 
   const requestSendEmail = useCallback(async (): Promise<void> => {
-    try {
-      if (!emailValidation(email)) {
-        return;
-      }
+    if (!emailValidation(email)) {
+      return;
+    }
 
-      const { status }: IResponse = await handleSendEmail(email);
+    await handleSendEmail(email)
+    .then(({ status }: IResponse) => {
       if (status === 200) {
         successToast('이메일 인증 코드를 발송하였습니다.');  
       }
+    })
 
-    } catch (error) {
-      console.log(error);
-    }
+    .catch((error: IError) => {
+      new AuthError(error).sendEmailError();
+    });
   }, [email, handleSendEmail]);
 
   const requestSignUp = useCallback(async (): Promise<void> => {
-    try {
-      const request: SignUpDto = {
-        email,
-        certifyCode: code,
-        password,
-        nickname,
-      };
+    const request: SignUpDto = {
+      email,
+      certifyCode: code,
+      password,
+      nickname,
+    };
 
-      if (!signUpValidation(request, rePassword)) {
-        return;
-      }
+    if (!signUpValidation(request, rePassword)) {
+      return;
+    }
 
-      request.password = sha256(password);
-      const { status }: IResponse = await handleSignUp(request);
-      
+    request.password = sha256(password);
+    await handleSignUp(request)
+    .then(({ status }: IResponse) => {
       if (status === 200) {
         successToast('회원가입을 성공하였습니다.');
         onBackPage();
       }
+    })
 
-    } catch (error) {
-      signUpError(error);
-    }
+    .catch((error: IError) => {
+      new AuthError(error).signUpError();
+    });
   }, [code, email, handleSignUp, nickname, onBackPage, password, rePassword]);
 
   return (
@@ -108,7 +109,7 @@ const SignUpContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
       requestSendEmail={requestSendEmail}
       requestSignUp={requestSignUp}
 
-      authLoading={authLoading}
+      authLoading={isLoading}
       emailLoading={emailLoading}
       
       onBackPage={onBackPage}

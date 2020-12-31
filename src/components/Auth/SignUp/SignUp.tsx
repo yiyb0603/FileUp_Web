@@ -4,8 +4,7 @@ import { ClassNamesFn } from "classnames/types";
 import AuthInput from "components/Common/Auth/AuthInput";
 import BlankButton from "components/Common/Auth/BlankButton";
 import AuthButton from "components/Common/Auth/AuthButton";
-import { Spinner } from '@class101/ui';
-import { Palette } from "styles/Palette/Palette";
+import AuthSpinner from "components/Common/Auth/AuthSpinner";
 
 const style = require("./SignUp.scss");
 const cx: ClassNamesFn = classNames.bind(style);
@@ -62,8 +61,6 @@ const SignUp = ({
   const { rePassword, onChangeRePassword } = rePasswordObject;
   const { nickname, onChangeNickname } = nicknameObject;
 
-  const { main } = Palette;
-
   return (
     <div className={cx('SignUp')}>
       <div className={cx('SignUp-Section')}>
@@ -73,7 +70,7 @@ const SignUp = ({
         <div className={cx('SignUp-Section-Mail')}>
           <BlankButton onClick={requestSendEmail}>
             {
-              emailLoading ? <Spinner color={main} /> : '인증메일 전송'
+              emailLoading ? <AuthSpinner /> : '인증메일 전송'
             }
           </BlankButton>
         </div>
@@ -101,7 +98,7 @@ const SignUp = ({
 
       <AuthButton onClick={requestSignUp}>
         {
-          authLoading ? <Spinner color={main} /> : '회원가입'
+          authLoading ? <AuthSpinner /> : '회원가입'
         }
       </AuthButton>
 
