@@ -8,8 +8,8 @@ import useStores from 'lib/hooks/useStores';
 import { SignInDto } from 'util/types/dto/Auth.dto';
 import { successToast } from 'lib/Toast';
 import { signInValidation } from 'validation/Auth/AuthValidation';
-import { signInError } from 'Error/Auth/AuthError';
-import { IResponse } from 'util/types/Response';
+import { IError, IResponse } from 'util/types/Response';
+import AuthError from 'Error/Auth/AuthError';
 
 interface PropTypes {
   setPageType: Dispatch<SetStateAction<authPageType>>;
@@ -17,7 +17,7 @@ interface PropTypes {
 
 const SignInContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
   const { store } = useStores();
-  const { handleSignIn, authLoading } = store.AuthStore;
+  const { handleSignIn, isLoading } = store.AuthStore;
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -38,27 +38,29 @@ const SignInContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
   }, [setPageType]);
 
   const requestSignIn = useCallback(async (): Promise<void> => {
-    try {
-      const request: SignInDto = {
-        email,
-        password,
-      };
+    const request: SignInDto = {
+      email,
+      password,
+    };
 
-      if (!signInValidation(request)) {
-        return;
-      }
+    if (!signInValidation(request)) {
+      return;
+    }
 
-      request.password = sha256(password);
-      const response: IResponse = await handleSignIn(request);
+    request.password = sha256(password);
+    await handleSignIn(request)
+    .then((response: IResponse) => {
+      const { status } = response;
 
-      if (response.status === 200) {
+      if (status === 200) {
         successToast("로그인을 성공하였습니다.");
         console.log(response);
       }
+    })
 
-    } catch (error) {
-      signInError(error);
-    }
+    .catch((error: IError) => {
+      new AuthError(error).signInError();
+    });
   }, [email, handleSignIn, password]);
 
   return (
@@ -67,7 +69,7 @@ const SignInContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
       passwordObject={groupingState('password', password, onChangePassword)}
       onRegister={onRegister}
       requestSignIn={requestSignIn}
-      authLoading={authLoading}
+      authLoading={isLoading}
     />
   );
 });

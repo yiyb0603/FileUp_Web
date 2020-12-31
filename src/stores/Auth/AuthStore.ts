@@ -1,39 +1,54 @@
 import { autobind } from 'core-decorators';
 import { postRequest } from 'lib/Axios';
 import { action, observable } from 'mobx';
+import InitialStore from 'stores/Initial';
 import { SignInDto, SignUpDto } from 'util/types/dto/Auth.dto';
 import { IResponse } from 'util/types/Response';
 
 @autobind
-class AuthStore {
-  @observable authLoading: boolean = false;
+class AuthStore extends InitialStore {
   @observable emailLoading: boolean = false;
 
   @action
-  handleSignIn = async (request: SignInDto) => {
-    this.authLoading = true;
-    const response: IResponse = await postRequest('/users/signIn', request);
-    this.authLoading = false;
+  public handleSignIn = async (request: SignInDto) => {
+    try {
+      this.isLoading = true;
+      const response: IResponse = await postRequest('/users/signIn', request);
+      this.isLoading = false;
 
-    return response;
+      return response;
+    } catch (error) {
+      this.isLoading = false;
+      throw error;
+    }
   }
 
   @action
-  handleSignUp = async (request: SignUpDto) => {
-    this.authLoading = true;
-    const response: IResponse = await postRequest('/users/signUp', request);
-    this.authLoading = false;
+  public handleSignUp = async (request: SignUpDto) => {
+    try {
+      this.isLoading = true;
+      const response: IResponse = await postRequest('/users/signUp', request);
+      this.isLoading = false;
 
-    return response;
+      return response;
+    } catch (error) {
+      this.isLoading = false;
+      throw error;
+    }
   }
 
   @action
-  handleSendEmail = async (email: string) => {
-    this.emailLoading = true;
-    const response: IResponse = await postRequest('/users/sendEmail', { email });
-    this.emailLoading = false;
+  public handleSendEmail = async (email: string) => {
+    try {
+      this.emailLoading = true;
+      const response: IResponse = await postRequest('/users/sendEmail', { email });
+      this.emailLoading = false;
 
-    return response;
+      return response;
+    } catch (error) {
+      this.emailLoading = false;
+      throw error;
+    }
   };
 };
 

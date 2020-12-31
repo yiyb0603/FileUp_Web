@@ -4,8 +4,7 @@ import { ClassNamesFn } from "classnames/types";
 import AuthInput from "components/Common/Auth/AuthInput";
 import AuthButton from "components/Common/Auth/AuthButton";
 import BlankButton from "components/Common/Auth/BlankButton";
-import { Spinner } from "@class101/ui";
-import { Palette } from "styles/Palette/Palette";
+import AuthSpinner from "components/Common/Auth/AuthSpinner";
 
 const style = require("./SignIn.scss");
 const cx: ClassNamesFn = classNames.bind(style);
@@ -30,15 +29,13 @@ const SignIn = ({ emailObject, passwordObject, onRegister, requestSignIn, authLo
   const { email, onChangeEmail } = emailObject;
   const { password, onChangePassword } = passwordObject;
 
-  const { main } = Palette;
-
   return (
     <div className={cx('SignIn')}>
       <AuthInput type="email" placeholder="Email" value={email} onChange={onChangeEmail} />
       <AuthInput type="password" placeholder="Password" value={password} onChange={onChangePassword} />
       <AuthButton onClick={requestSignIn}>
         {
-          authLoading ? <Spinner color={main} /> : "로그인"
+          authLoading ? <AuthSpinner /> : "로그인"
         }
       </AuthButton>
 
