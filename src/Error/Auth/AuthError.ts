@@ -1,5 +1,5 @@
-import { errorToast } from "lib/Toast";
-import { IError, IResponse } from "util/types/Response";
+import { errorToast } from 'lib/Toast';
+import { IError, IResponse } from 'util/types/Response';
 
 class AuthError {
   error: IResponse = {
@@ -18,7 +18,7 @@ class AuthError {
 
     switch (status) {
       case 409:
-        errorToast("이미 존재하는 이메일입니다.");
+        errorToast('이미 존재하는 이메일입니다.');
         return;
 
       default:
@@ -32,15 +32,15 @@ class AuthError {
 
     switch (status) {
       case 400:
-        errorToast("검증 오류입니다.");
+        errorToast('검증 오류입니다.');
         return;
 
       case 401:
-        errorToast("인증번호가 올바르지 않습니다.");
+        errorToast('인증번호가 올바르지 않습니다.');
         return;
 
       case 500:
-        errorToast("서버 오류입니다.");
+        errorToast('서버 오류입니다.');
         return;
 
       default:
@@ -54,19 +54,19 @@ class AuthError {
 
     switch (status) {
       case 400:
-        errorToast("검증 오류입니다.");
+        errorToast('검증 오류입니다.');
         return;
 
       case 401:
-        errorToast("아이디 또는 비밀번호가 올바르지 않습니다.");
+        errorToast('아이디 또는 비밀번호가 올바르지 않습니다.');
         return;
 
       case 409:
-        errorToast("존재하지 않는 유저입니다.");
+        errorToast('존재하지 않는 유저입니다.');
         return;
 
       case 500:
-        errorToast("서버 오류입니다.");
+        errorToast('서버 오류입니다.');
         return;
 
       default:
