@@ -1,0 +1,101 @@
+$NOTO_SANS_URL: '../../assets/fonts/NotoSans/NotoSans';
+$NOTO_SANS_KR_URL: '../../assets/fonts/NotoSansKR/NotoSansKR';
+
+@mixin font_face($name, $url) {
+	font-family: $name;
+	font-display: block; // 웹 폰트 로딩처리
+	src: url($url + '.eot');
+	src: url($url + '.eot?#iefix') format('embedded-opentype'),
+		url($url + '.woff2') format('woff2'), url($url + '.woff') format('woff'),
+		url($url + '.ttf') format('truetype');
+}
+
+$NOTO_SANS_THIN: 'Noto Sans Thin';
+$NOTO_SANS_LIGHT: 'Noto Sans Light';
+$NOTO_SANS_REGULAR: 'Noto Sans Regular';
+$NOTO_SANS_MEDIUM: 'Noto Sans Medium';
+$NOTO_SANS_SEMIBOLD: 'Noto Sans SemiBold';
+$NOTO_SANS_BOLD: 'Noto Sans Bold';
+$NOTO-SANS_BLACK: 'Noto Sans Black';
+
+@font-face {
+	@include font_face($NOTO_SANS_THIN, $NOTO_SANS_URL + '-Thin');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_LIGHT, $NOTO_SANS_URL + '-Light');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_REGULAR, $NOTO_SANS_URL + '-Regular');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_MEDIUM, $NOTO_SANS_URL + '-Medium');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_SEMIBOLD, $NOTO_SANS_URL + '-SemiBold');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_BOLD, $NOTO_SANS_URL + '-Bold');
+}
+
+@font-face {
+	@include font_face($NOTO-SANS_BLACK, $NOTO_SANS_URL + '-Black');
+}
+
+$NOTO_SANS_KR_THIN: 'Noto Sans KR Thin';
+$NOTO_SANS_KR_LIGHT: 'Noto Sans KR Light';
+$NOTO_SANS_KR_DEMILIGHT: 'Noto Sans KR DemiLight';
+$NOTO_SANS_KR_REGULAR: 'Noto Sans KR Regular';
+$NOTO_SANS_KR_MEDIUM: 'Noto Sans KR Medium';
+$NOTO_SANS_KR_BOLD: 'Noto Sans KR Bold';
+$NOTO_SANS_KR_BLACK: 'Noto Sans KR Black';
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_THIN, $NOTO_SANS_KR_URL + '-Thin');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_LIGHT, $NOTO_SANS_KR_URL + '-Light');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_DEMILIGHT, $NOTO_SANS_KR_URL + '-DemiLight');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_REGULAR, $NOTO_SANS_KR_URL + '-Regular');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_MEDIUM, $NOTO_SANS_KR_URL + '-Medium');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_BOLD, $NOTO_SANS_KR_URL + '-Bold');
+}
+
+@font-face {
+	@include font_face($NOTO_SANS_KR_BLACK, $NOTO_SANS_KR_URL + '-Black');
+}
+
+/* js에서 font-size를 적용하려면 typography_scheme.js를
+  import하여 작업하면 된다. 
+
+  ex) import { typography } from 'styles/typography/typography_scheme.js';
+      const { size } = typography;
+
+      <div ... fontSize: size.s1 ></div>
+*/
+
+$font_content_1: 12px; // detail contents
+$font_content_2: 14px; // content1
+$font_content_3: 16px; // content2
+
+$font_title_1: 18px; // title1
+$font_title_2: 20px; // title2
+$font_title_3: 22px; // title3
+$font_title_4: 24px; // title4

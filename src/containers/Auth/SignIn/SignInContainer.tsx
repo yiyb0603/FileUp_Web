@@ -9,7 +9,7 @@ import { SignInDto } from 'util/types/dto/Auth.dto';
 import { successToast } from 'lib/Toast';
 import { signInValidation } from 'validation/Auth/AuthValidation';
 import { IError, IResponse } from 'util/types/Response';
-import AuthError from 'Error/Auth/AuthError';
+import AuthError from 'error/Auth/AuthError';
 
 interface PropTypes {
   setPageType: Dispatch<SetStateAction<authPageType>>;
