@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from 'classnames';
 import { ClassNamesFn } from "classnames/types";
-import Logo from 'assets/icons/Logo.svg';
+import Logo from 'assets/icons/Logo/Logo.svg';
 import SignInContainer from "containers/Auth/SignIn";
 import { authPageType } from "enum/PageType";
 import SignUpContainer from "containers/Auth/SignUp";

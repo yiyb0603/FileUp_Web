@@ -1,0 +1,14 @@
+.PopularUsers {
+	width: 200px;
+	max-width: 200px;
+	padding: 10px 1rem;
+
+	&-Title {
+		font-weight: bold;
+		margin-bottom: 14px;
+	}
+
+	&-Users {
+		line-height: 40px;
+	}
+}

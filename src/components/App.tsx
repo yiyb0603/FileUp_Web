@@ -5,12 +5,13 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = (): JSX.Element => {
-  const { Sign } = Pages;
+  const { Sign, Home } = Pages;
 
   return (
     <>
       <Switch>
-        <Route exact path="/" component={Sign} />
+        <Route exact path="/sign" component={Sign} />
+        <Route exact path="/" component={Home} />
       </Switch>
 
       <ToastContainer
