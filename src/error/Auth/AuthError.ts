@@ -1,20 +1,14 @@
+import CustomError from 'error/CustomError';
 import { errorToast } from 'lib/Toast';
-import { IError, IResponse } from 'util/types/Response';
+import { IError } from 'util/types/Response';
 
-class AuthError {
-  error: IResponse = {
-    status: 0,
-    message: '',
-  };
-
-  constructor(error: IError) {
-    const { status, message } = error.response.data;
-    this.error.status = status;
-    this.error.message = message;
+class AuthError extends CustomError {
+  constructor(private _error: IError) {
+    super(_error);
   };
 
   public sendEmailError = (): void => {
-    const { status, message } = this.error;
+    const { status, message } = this;
 
     switch (status) {
       case 409:
@@ -28,7 +22,7 @@ class AuthError {
   }
 
   public signUpError = (): void => {
-    const { status, message } = this.error;
+    const { status, message } = this;
 
     switch (status) {
       case 400:
@@ -50,7 +44,7 @@ class AuthError {
   }
 
   public signInError = (): void => {
-    const { status, message } = this.error;
+    const { status, message } = this;
 
     switch (status) {
       case 400:

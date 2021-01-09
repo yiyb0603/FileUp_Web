@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, KeyboardEvent } from "react";
 import classNames from 'classnames';
 import { ClassNamesFn } from "classnames/types";
 
@@ -10,9 +10,10 @@ interface AuthInputProps {
   placeholder: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const AuthInput = ({ type, placeholder, value, onChange }: AuthInputProps): JSX.Element => {
+const AuthInput = ({ type, placeholder, value, onChange, onKeyDown }: AuthInputProps): JSX.Element => {
   return (
     <input
       className={cx('AuthInput')}
@@ -20,6 +21,7 @@ const AuthInput = ({ type, placeholder, value, onChange }: AuthInputProps): JSX.
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
     />
   );
 };

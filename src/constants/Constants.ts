@@ -1,3 +1,1 @@
-export default class Constants {
-
-}
+export const TOKEN_NAME: string = 'fileup-token';

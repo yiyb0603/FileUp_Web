@@ -16,6 +16,7 @@ const App = (): JSX.Element => {
 
       <ToastContainer
         style={{ width: 400 }}
+        autoClose={5000}
         draggable={true}
         closeOnClick={true}
         pauseOnHover={false}

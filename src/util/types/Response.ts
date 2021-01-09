@@ -8,6 +8,7 @@ export interface IError {
     data: {
       status: number;
       message: string;
+      object: null;
     };
   };
 };
