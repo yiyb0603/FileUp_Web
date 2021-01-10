@@ -3,6 +3,13 @@
 	max-width: 200px;
 	padding: 10px 1rem;
 
+	&-Wrapper {
+		display: inline-block;
+		position: sticky;
+		top: 10px;
+		left: 10px;
+	}
+
 	&-Title {
 		font-weight: bold;
 		margin-bottom: 14px;

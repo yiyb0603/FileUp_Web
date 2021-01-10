@@ -1,0 +1,31 @@
+@import 'styles/Palette/Palette.scss';
+
+@mixin flexStyle() {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+}
+
+.FeedItem {
+	width: 100%;
+	border: 2px solid $skyBlue;
+	border-top: none;
+	padding: 18px;
+
+	&-Title {
+		font-size: 20px;
+		font-weight: bold;
+		border-bottom: 1px solid $main;
+		padding-bottom: 8px;
+	}
+
+	&-Contents {
+		padding-top: 5px;
+		font-size: 18px;
+		word-break: break-all;
+		white-space: pre-wrap;
+		min-height: 150px;
+		max-height: 150px;
+		overflow: auto;
+	}
+}
