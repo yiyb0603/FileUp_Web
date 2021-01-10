@@ -1,0 +1,68 @@
+@import 'styles/Palette/Palette.scss';
+
+@mixin flexStyle() {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+}
+
+@mixin bottomIconStyle($color) {
+	color: $color;
+	font-size: 24px;
+	margin-right: 4px;
+}
+
+.FeedBottom {
+	margin-top: 10px;
+	@include flexStyle();
+	justify-content: space-between;
+
+	&-Info {
+		margin-top: 10px;
+		@include flexStyle();
+		justify-content: space-between;
+
+		&-Profile {
+			@include flexStyle();
+
+			&-Image {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				object-fit: cover;
+				margin-right: 6px;
+			}
+
+			&-Name {
+				font-size: 18px;
+			}
+		}
+
+		&-Right {
+			width: 45%;
+			@include flexStyle();
+			justify-content: space-evenly;
+
+			&-Time {
+				color: $fontGray;
+				letter-spacing: 0.5px;
+			}
+
+			&-HeartWrap {
+				@include flexStyle();
+
+				&-Heart {
+					@include bottomIconStyle($main);
+				}
+			}
+
+			&-CommentWrap {
+				@include flexStyle();
+
+				&-Comment {
+					@include bottomIconStyle($black);
+				}
+			}
+		}
+	}
+}

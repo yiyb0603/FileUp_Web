@@ -1,0 +1,26 @@
+@import 'styles/Palette/Palette.scss';
+
+@mixin flexStyle() {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+}
+
+.FeedFile {
+	margin-top: 14px;
+
+	&-File {
+		@include flexStyle();
+		border: 1px solid $skyBlue;
+		border-radius: 5px;
+		padding: 10px;
+		color: $fontGray;
+
+		&-Icon {
+			font-size: 20px;
+			font-weight: bold;
+			margin-right: 10px;
+			color: $main;
+		}
+	}
+}

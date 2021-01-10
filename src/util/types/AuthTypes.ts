@@ -5,3 +5,8 @@ export interface ILoginTypes extends IResponse {
     token: string;
   };
 };
+
+export interface ITokenTypes {
+  id: number;
+  email: string;
+}
