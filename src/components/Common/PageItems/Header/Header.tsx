@@ -11,9 +11,10 @@ const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
   moveLocation: (url: string) => void;
+  onLogout: () => void;
 };
 
-const Header = ({ moveLocation }: PropTypes): JSX.Element => {
+const Header = ({ moveLocation, onLogout }: PropTypes): JSX.Element => {
   return (
     <div className={cx('Header')}>
       <div className={cx('Header-Contents')}>
@@ -22,7 +23,7 @@ const Header = ({ moveLocation }: PropTypes): JSX.Element => {
         <div className={cx('Header-Contents-Right')}>
           <img src={Write} alt ='Write' />
           <img src={Profile} alt ='Profile' />
-          <img src={Logout} alt ='Logout' onClick={() => moveLocation('/sign')} />
+          <img src={Logout} alt ='Logout' onClick={onLogout} />
         </div>
       </div>
     </div>

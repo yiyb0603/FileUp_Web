@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, KeyboardEvent } from "react";
 import classNames from 'classnames';
 import { ClassNamesFn } from "classnames/types";
 import AuthInput from "components/Common/Auth/AuthInput";
@@ -23,16 +23,17 @@ interface SignInProps {
   onRegister: () => void;
   requestSignIn: () => Promise<void>;
   authLoading: boolean;
+  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
-const SignIn = ({ emailObject, passwordObject, onRegister, requestSignIn, authLoading }: SignInProps): JSX.Element => {
+const SignIn = ({ emailObject, passwordObject, onRegister, requestSignIn, authLoading, onKeyDown }: SignInProps): JSX.Element => {
   const { email, onChangeEmail } = emailObject;
   const { password, onChangePassword } = passwordObject;
 
   return (
     <div className={cx('SignIn')}>
-      <AuthInput type="email" placeholder="Email" value={email} onChange={onChangeEmail} />
-      <AuthInput type="password" placeholder="Password" value={password} onChange={onChangePassword} />
+      <AuthInput type="email" placeholder="Email" value={email} onChange={onChangeEmail} onKeyDown={onKeyDown} />
+      <AuthInput type="password" placeholder="Password" value={password} onChange={onChangePassword} onKeyDown={onKeyDown} />
       <AuthButton onClick={requestSignIn}>
         {
           authLoading ? <AuthSpinner /> : "로그인"
