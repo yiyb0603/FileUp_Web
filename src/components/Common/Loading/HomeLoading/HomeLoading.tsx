@@ -1,10 +1,5 @@
 import React from "react";
-import classNames from 'classnames';
-import { ClassNamesFn } from "classnames/types";
 import Skeleton from '@material-ui/lab/Skeleton';
-
-const style = require("./HomeLoading.scss");
-const cx: ClassNamesFn = classNames.bind(style);
 
 const HomeLoading = (): JSX.Element => {
   return (
