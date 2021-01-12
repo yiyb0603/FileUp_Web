@@ -6,7 +6,7 @@
 	align-items: center;
 }
 
-@mixin bottomIconStyle($color) {
+@mixin iconStyle($color) {
 	color: $color;
 	font-size: 24px;
 	margin-right: 4px;
@@ -52,7 +52,7 @@
 				@include flexStyle();
 
 				&-Heart {
-					@include bottomIconStyle($main);
+					@include iconStyle($main);
 				}
 			}
 
@@ -60,7 +60,7 @@
 				@include flexStyle();
 
 				&-Comment {
-					@include bottomIconStyle($black);
+					@include iconStyle($black);
 				}
 			}
 
@@ -68,9 +68,32 @@
 				@include flexStyle();
 
 				&-View {
-					@include bottomIconStyle($black);
+					@include iconStyle($black);
 				}
 			}
+		}
+	}
+
+	&-Icon {
+		display: flex;
+		align-items: center;
+		padding: 8px 1rem;
+		border-bottom: 1px solid $lighterGray;
+
+		&-Delete {
+			color: $red;
+		}
+
+		&-DeleteIcon {
+			@include iconStyle($red);
+		}
+
+		&-Modify {
+			color: $black;
+		}
+
+		&-ModifyIcon {
+			@include iconStyle($black);
 		}
 	}
 }

@@ -4,9 +4,13 @@ import { ClassNamesFn } from "classnames/types";
 import { GoCommentDiscussion } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { FaEye } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { HiPencilAlt } from 'react-icons/hi';
 import Profile from 'assets/icons/Home/profile_default.jpg';
 import { IUserTypes } from "util/types/UserTypes";
 import { handleMomentParse } from "lib/Moment";
+import Menus from "components/Common/Menus";
+import { MenuItem } from '@szhsin/react-menu';
 
 const style = require("./FeedBottom.scss");
 const cx: ClassNamesFn = classNames.bind(style);
@@ -50,6 +54,18 @@ const FeedBottom = ({ id, author, comments, created, updated, like, view }: Prop
           <FaEye className={cx('FeedBottom-Info-Right-ViewWrap-View')} />
           <div className={cx('FeedBottom-Info-Right-ViewWrap-Count')}>{view}</div>
         </div>
+
+        <Menus direction="top">
+          <MenuItem className={cx('FeedBottom-Icon')}>
+            <RiDeleteBin6Line className={cx('FeedBottom-Icon-DeleteIcon')} />
+            <div className={cx('FeedBottom-Icon-Delete')}>삭제</div>
+          </MenuItem>
+
+          <MenuItem className={cx('FeedBottom-Icon')}>
+            <HiPencilAlt className={cx('FeedBottom-Icon-ModifyIcon')} />
+            <div className={cx('FeedBottom-Icon-Modify')}>수정</div>
+          </MenuItem>
+        </Menus>
       </div>
     </div>
   );
