@@ -7,7 +7,7 @@ const cx: ClassNamesFn = classNames.bind(style);
 
 interface BlankButtonProps {
   children?: ReactNode;
-  onClick: () => Promise<void> | void;
+  onClick: () => (false | Promise<void>) | void;
 }
 
 const BlankButton = ({ children, onClick }: BlankButtonProps): JSX.Element => {

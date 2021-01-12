@@ -2,6 +2,7 @@ import { autobind } from 'core-decorators';
 import { postRequest } from 'lib/Axios';
 import { action, observable } from 'mobx';
 import InitialStore from 'stores/Initial';
+import { ILoginTypes } from 'util/types/AuthTypes';
 import { SignInDto, SignUpDto } from 'util/types/dto/Auth.dto';
 import { IResponse } from 'util/types/Response';
 
@@ -10,10 +11,10 @@ class AuthStore extends InitialStore {
   @observable emailLoading: boolean = false;
 
   @action
-  public handleSignIn = async (request: SignInDto) => {
+  public handleSignIn = async (request: SignInDto): Promise<ILoginTypes> => {
     try {
       this.isLoading = true;
-      const response: IResponse = await postRequest('/users/signIn', request);
+      const response: ILoginTypes = await postRequest('/users/signIn', request);
       this.isLoading = false;
 
       return response;
@@ -24,7 +25,7 @@ class AuthStore extends InitialStore {
   }
 
   @action
-  public handleSignUp = async (request: SignUpDto) => {
+  public handleSignUp = async (request: SignUpDto): Promise<IResponse> => {
     try {
       this.isLoading = true;
       const response: IResponse = await postRequest('/users/signUp', request);

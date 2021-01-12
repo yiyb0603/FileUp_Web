@@ -63,6 +63,14 @@
 					@include bottomIconStyle($black);
 				}
 			}
+
+			&-ViewWrap {
+				@include flexStyle();
+
+				&-View {
+					@include bottomIconStyle($black);
+				}
+			}
 		}
 	}
 }

@@ -6,13 +6,17 @@ class CustomError {
   readonly object: null = null;
 
   constructor(error: IError) {
-    const { data } = error.response;
+    if (error.response) {
+      const { data } = error.response;
 
-    if (data as CustomError) {
-      const { status, message } = error.response.data;
+      if (data as CustomError) {
+        const { status, message } = error.response.data;
 
-      this.status = status;
-      this.message = message;
+        this.status = status;
+        this.message = message;
+      } else {
+        throw error;
+      }
     } else {
       throw error;
     }
