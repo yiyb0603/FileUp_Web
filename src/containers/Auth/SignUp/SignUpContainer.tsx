@@ -56,7 +56,7 @@ const SignUpContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
   }, [setPageType]);
 
   const requestSendEmail = useCallback(async (): Promise<void> => {
-    if (!emailValidation(email)) {
+    if (emailLoading || !emailValidation(email)) {
       return;
     }
 
@@ -70,7 +70,7 @@ const SignUpContainer = observer(({ setPageType }: PropTypes): JSX.Element => {
     .catch((error: IError) => {
       new AuthError(error).sendEmailError();
     });
-  }, [email, handleSendEmail]);
+  }, [email, handleSendEmail, emailLoading]);
 
   const requestSignUp = useCallback(async (): Promise<void> => {
     const request: SignUpDto = {

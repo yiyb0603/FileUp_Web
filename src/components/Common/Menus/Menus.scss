@@ -1,0 +1,13 @@
+.Menus {
+	&-Disable {
+		border: none !important;
+
+		&:hover {
+			background-color: transparent !important;
+		}
+	}
+}
+
+.rc-menu {
+	padding: 0 !important;
+}

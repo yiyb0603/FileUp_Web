@@ -1,0 +1,16 @@
+@import 'styles/Palette/Palette.scss';
+
+.MenuBar {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	cursor: pointer;
+
+	& > div {
+		width: 8px;
+		height: 8px;
+		background-color: $gray;
+		border-radius: 50%;
+		margin-left: 4px;
+	}
+}

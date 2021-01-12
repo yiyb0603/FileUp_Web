@@ -1,21 +1,27 @@
 import React from 'react';
 import classNames from 'classnames';
 import { ClassNamesFn } from 'classnames/types';
+import { ICategoryTypes } from 'util/types/CategoryTypes';
+import CategoryItem from './CategoryItem';
 
 const style = require('./Category.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
-const Category = (): JSX.Element => {
+interface PropTypes {
+  categoryList: ICategoryTypes[];
+}
+
+const Category = ({ categoryList }: PropTypes): JSX.Element => {
   return (
     <div className={cx('Category')}>
       <div className={cx('Category-List')}>
-        <div className={cx('Category-List-Item')}>
-          <div>최신순</div>
-          <div>카테고리1</div>
-          <div>카테고리2</div>
-          <div>좋아요</div>
-          <div>팔로우</div>
-        </div>
+      {
+        categoryList.map(({ id, name }: ICategoryTypes) => {
+          return (
+            <CategoryItem key={id} id={id} name={name} />
+          );
+        })
+      }
       </div>
     </div>
   );
