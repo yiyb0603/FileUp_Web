@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Menu, MenuButton, MenuDirection } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
-import MenuBar from "./MenuBar";
-import { ClassNamesFn } from "classnames/types";
+import MenuBar from './MenuBar';
+import { ClassNamesFn } from 'classnames/types';
 
 const style = require('./Menus.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -22,7 +22,7 @@ const Menus = ({ children, direction }: PropTypes): JSX.Element => {
         </MenuButton>
       }
       direction={direction}
-      align="end"
+      align='end'
     >
       {children}
     </Menu>
