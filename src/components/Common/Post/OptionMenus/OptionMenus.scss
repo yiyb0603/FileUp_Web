@@ -1,0 +1,33 @@
+@import 'styles/Palette/Palette.scss';
+
+@mixin iconStyle($color) {
+	color: $color;
+	font-size: 24px;
+	margin-right: 4px;
+}
+
+.OptionMenus {
+	&-Icon {
+		display: flex;
+		display: -webkit-flex;
+		align-items: center;
+		padding: 8px 1rem;
+		border-bottom: 1px solid $lighterGray;
+
+		&-Delete {
+			color: $red;
+		}
+
+		&-DeleteIcon {
+			@include iconStyle($red);
+		}
+
+		&-Modify {
+			color: $black;
+		}
+
+		&-ModifyIcon {
+			@include iconStyle($black);
+		}
+	}
+}

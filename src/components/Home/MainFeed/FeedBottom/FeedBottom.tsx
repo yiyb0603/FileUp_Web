@@ -1,18 +1,10 @@
-import React from "react";
+import React from 'react';
 import classNames from 'classnames';
-import { ClassNamesFn } from "classnames/types";
-import { GoCommentDiscussion } from "react-icons/go";
-import { AiFillHeart } from "react-icons/ai";
-import { FaEye } from 'react-icons/fa';
-import { RiDeleteBin6Line } from 'react-icons/ri';
-import { HiPencilAlt } from 'react-icons/hi';
-import Profile from 'assets/icons/Home/profile_default.jpg';
-import { IUserTypes } from "util/types/UserTypes";
-import { handleMomentParse } from "lib/Moment";
-import Menus from "components/Common/Menus";
-import { MenuItem } from '@szhsin/react-menu';
+import { ClassNamesFn } from 'classnames/types';
+import { IUserTypes } from 'util/types/UserTypes';
+import PostInfo from 'components/Common/Post/PostInfo';
 
-const style = require("./FeedBottom.scss");
+const style = require('./FeedBottom.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
@@ -30,43 +22,15 @@ const FeedBottom = ({ id, author, comments, created, updated, like, view }: Prop
 
   return (
     <div className={cx('FeedBottom')}>
-      <div className={cx('FeedBottom-Info-Profile')}>
-        <img src={Profile} alt ="profile" className={cx('FeedBottom-Info-Profile-Image')} />
-        <div className={cx('FeedBottom-Info-Profile-Name')}>{nickname}#{code}</div>
-      </div>
-
-      <div className={cx('FeedBottom-Info-Right')}>
-        <div className={cx('FeedBottom-Info-Right-Time')}>
-          {handleMomentParse(created, 'YYYY년 MM월 DD일 HH시 mm분')
-        }</div>
-
-        <div className={cx('FeedBottom-Info-Right-HeartWrap')}>
-          <AiFillHeart className={cx('FeedBottom-Info-Right-HeartWrap-Heart')} />
-          <div className={cx('FeedBottom-Info-Right-HeartWrap-Count')}>{like}</div>
-        </div>
-
-        <div className={cx('FeedBottom-Info-Right-CommentWrap')}>
-          <GoCommentDiscussion className={cx('FeedBottom-Info-Right-CommentWrap-Comment')} />
-          <div className={cx('FeedBottom-Info-Right-CommentWrap-Count')}>{comments}</div>
-        </div>
-
-        <div className={cx('FeedBottom-Info-Right-ViewWrap')}>
-          <FaEye className={cx('FeedBottom-Info-Right-ViewWrap-View')} />
-          <div className={cx('FeedBottom-Info-Right-ViewWrap-Count')}>{view}</div>
-        </div>
-
-        <Menus direction="top">
-          <MenuItem className={cx('FeedBottom-Icon')}>
-            <RiDeleteBin6Line className={cx('FeedBottom-Icon-DeleteIcon')} />
-            <div className={cx('FeedBottom-Icon-Delete')}>삭제</div>
-          </MenuItem>
-
-          <MenuItem className={cx('FeedBottom-Icon')}>
-            <HiPencilAlt className={cx('FeedBottom-Icon-ModifyIcon')} />
-            <div className={cx('FeedBottom-Icon-Modify')}>수정</div>
-          </MenuItem>
-        </Menus>
-      </div>
+      <PostInfo
+        nickname={nickname}
+        code={code}
+        created={created}
+        like={like}
+        comments={comments}
+        view={view}
+        isMenu={true}
+      />
     </div>
   );
 };
