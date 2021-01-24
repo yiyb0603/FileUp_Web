@@ -1,0 +1,23 @@
+.CommentInput {
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+
+	&-Input {
+		flex: 1;
+		margin: 12px 0;
+		border: 2px solid var(--gray);
+		border-radius: 5px;
+		padding: 10px 14px;
+		font-size: 1rem;
+
+		&:focus {
+			border: 2px solid var(--skyBlue);
+		}
+	}
+
+	&-Send {
+		height: 50px;
+		cursor: pointer;
+	}
+}

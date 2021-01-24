@@ -6,16 +6,17 @@ import { IPostViewResObj } from 'util/types/PostTypes';
 import { IFileType } from 'util/types/FileTypes';
 import PostFile from './PostFile';
 import PostInfo from 'components/Common/Post/PostInfo';
+import CommentTemplate from './Comment/CommentTemplate';
 
 const style = require('./Post.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
-  postInfo: IPostViewResObj | null;
+  postInfo: IPostViewResObj;
 };
 
 const Post = ({ postInfo }: PropTypes): JSX.Element => {
-  const { id, category, title, content, created, updated, preview, view, like, comments, author, files } = postInfo!;
+  const { id, category, title, content, created, updated, preview, view, like, comments, author, files } = postInfo;
   const { nickname, code } = author;
 
   return (
@@ -28,7 +29,7 @@ const Post = ({ postInfo }: PropTypes): JSX.Element => {
       <div className={cx('Post-Contents')}>
         <img
           src="https://raw.githubusercontent.com/sumitc91/sumitc91.github.io/master/Blogs/23a73932-d77d-4bd4-b4ab-06ea4d5183d3_c-sharp-dotnet.jpg"
-          alt="imagess"
+          alt="images"
         />
         <div>{content}</div>
       </div>
@@ -58,6 +59,8 @@ const Post = ({ postInfo }: PropTypes): JSX.Element => {
           isMenu={false}
         />
       </div>
+
+      <CommentTemplate commentLength={comments.length} />
     </div>
   );
 };

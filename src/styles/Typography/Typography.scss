@@ -3,7 +3,7 @@ $NOTO_SANS_KR_URL: '../../assets/fonts/NotoSansKR/NotoSansKR';
 
 @mixin font_face($name, $url) {
 	font-family: $name;
-	font-display: block; // 웹 폰트 로딩처리
+	font-display: block;
 	src: url($url + '.eot');
 	src: url($url + '.eot?#iefix') format('embedded-opentype'),
 		url($url + '.woff2') format('woff2'), url($url + '.woff') format('woff'),
