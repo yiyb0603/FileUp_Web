@@ -1,4 +1,3 @@
-@import 'styles/Palette/Palette.scss';
 @import 'styles/Typography/Typography.scss';
 
 * {
@@ -17,7 +16,7 @@ body,
 #root {
 	width: 100%;
 	height: 100%;
-	background-color: rgba($rgbaBackground, 0.02);
+	background-color: var(--white);
 }
 
 body {

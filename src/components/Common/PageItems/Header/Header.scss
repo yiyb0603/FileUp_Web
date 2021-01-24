@@ -1,11 +1,9 @@
-@import 'styles/Palette/Palette.scss';
-
 .Header {
 	width: 100%;
 	height: 95px;
 	max-height: 95px;
-	background-color: $white;
-	border-bottom: 1px solid $black;
+	background-color: var(--white);
+	border-bottom: 1px solid var(--black);
 
 	&-Contents {
 		max-width: 1400px;

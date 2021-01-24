@@ -1,10 +1,8 @@
-@import 'styles/Palette/Palette.scss';
-
 .AuthButton {
 	width: 100%;
 	height: 40px;
-	background-color: $main;
-	color: $white;
+	background-color: var(--main);
+	color: var(--white);
 	border: none;
 	border-radius: 25px;
 	outline: none;

@@ -1,12 +1,10 @@
-@import 'styles/Palette/Palette.scss';
-
 .ScrollTop {
 	width: 70px;
 	height: 70px;
 	position: fixed;
 	bottom: 2rem;
 	right: 2rem;
-	background-color: $main;
+	background-color: var(--main);
 	border: none;
 	outline: none;
 	border-radius: 25px;
@@ -25,7 +23,7 @@
 	}
 
 	&-Icon {
-		color: $white;
+		color: var(--white);
 		font-size: 2rem;
 	}
 }

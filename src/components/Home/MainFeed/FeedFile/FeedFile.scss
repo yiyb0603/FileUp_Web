@@ -1,5 +1,3 @@
-@import 'styles/Palette/Palette.scss';
-
 @mixin flexStyle() {
 	display: flex;
 	display: -webkit-flex;
@@ -11,16 +9,16 @@
 
 	&-File {
 		@include flexStyle();
-		border: 1px solid $skyBlue;
+		border: 1px solid var(--skyBlue);
 		border-radius: 5px;
 		padding: 10px;
-		color: $fontGray;
+		color: var(--fontGray);
 
 		&-Icon {
 			font-size: 28px;
 			font-weight: bold;
 			margin-right: 8px;
-			color: $main;
+			color: var(--main);
 		}
 	}
 }
