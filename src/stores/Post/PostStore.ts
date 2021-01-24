@@ -15,6 +15,7 @@ class PostStore extends InitialStore {
   @action
   public handleGetPosts = async (): Promise<IPostList> => {
     try {
+      this.postList = [];
       this.isLoading = true;
       const response: IPostList = await getResponse(`/posts/${this.count}`);
 
@@ -52,6 +53,11 @@ class PostStore extends InitialStore {
       throw error;
     }
   }
+
+  @action
+  public handleClearInfo = (): void => {
+    this.postInfo = null;
+  };
 
   @action
   public handleIncreaseCount = (count: number | null): void => {

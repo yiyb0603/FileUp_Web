@@ -1,5 +1,3 @@
-@import 'styles/Palette/Palette.scss';
-
 @mixin iconStyle($color) {
 	color: $color;
 	font-size: 24px;
@@ -12,22 +10,22 @@
 		display: -webkit-flex;
 		align-items: center;
 		padding: 8px 1rem;
-		border-bottom: 1px solid $lighterGray;
+		border-bottom: 1px solid var(--lighterGray);
 
 		&-Delete {
-			color: $red;
+			color: var(--red);
 		}
 
 		&-DeleteIcon {
-			@include iconStyle($red);
+			@include iconStyle(var(--red));
 		}
 
 		&-Modify {
-			color: $black;
+			color: var(--black);
 		}
 
 		&-ModifyIcon {
-			@include iconStyle($black);
+			@include iconStyle(var(--black));
 		}
 	}
 }

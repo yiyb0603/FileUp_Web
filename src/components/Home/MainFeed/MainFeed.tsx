@@ -17,10 +17,7 @@ const MainFeed = ({ isLoading, postList }: PropTypes): JSX.Element => {
   return (
     <div className={cx('MainFeed')}>
       {
-        isLoading ? 
-        <>
-          <HomeLoading />
-        </>
+        isLoading ? <HomeLoading />
         :
         postList.map((post: IPostView) => {
           return (

@@ -1,27 +1,21 @@
-@import 'styles/Palette/Palette.scss';
-
-@mixin flexStyle() {
-	display: flex;
-	display: -webkit-flex;
-	align-items: center;
-}
-
 .PostFile {
 	margin-top: 14px;
 
 	&-File {
-		@include flexStyle();
-		border: 1px solid $skyBlue;
+		display: flex;
+		display: -webkit-flex;
+		align-items: center;
+		border: 1px solid var(--skyBlue);
 		border-radius: 5px;
 		padding: 10px;
-		color: $fontGray;
+		color: var(--fontGray);
 		font-size: 14px;
 
 		&-Icon {
 			font-size: 28px;
 			font-weight: bold;
-			margin-right: 8px;
-			color: $main;
+			margin-right: 4px;
+			color: var(--main);
 		}
 	}
 }

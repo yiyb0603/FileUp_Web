@@ -1,5 +1,5 @@
 const customTrim = (value: string): string => {
-  return value.replace(/(\s*)/g, '');
+  return value.trim().replace(/(\s*)/g, '');
 };
 
 export default customTrim;
