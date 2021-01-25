@@ -4,9 +4,9 @@ import { ClassNamesFn } from 'classnames/types';
 import OptionMenus from 'components/Common/Post/OptionMenus';
 import { IPostViewResObj } from 'util/types/PostTypes';
 import { IFileType } from 'util/types/FileTypes';
-import PostFile from './PostFile';
 import PostInfo from 'components/Common/Post/PostInfo';
 import CommentTemplate from './Comment/CommentTemplate';
+import PostFile from 'components/Common/Post/PostFile';
 
 const style = require('./Post.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -40,8 +40,8 @@ const Post = ({ postInfo }: PropTypes): JSX.Element => {
             return (
               <PostFile
                 key={id}
-                name={name}
-                size={size}
+                text={name}
+                onClick={() => {}}
               />
             )
           })
@@ -50,6 +50,7 @@ const Post = ({ postInfo }: PropTypes): JSX.Element => {
 
       <div className={cx('Post-Info')}>
         <PostInfo
+          id={author.id}
           nickname={nickname}
           code={code}
           created={created}

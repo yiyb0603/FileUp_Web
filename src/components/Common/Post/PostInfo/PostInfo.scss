@@ -16,6 +16,7 @@
 
 	&-Profile {
 		@include flexStyle();
+		cursor: pointer;
 
 		&-Image {
 			width: 40px;

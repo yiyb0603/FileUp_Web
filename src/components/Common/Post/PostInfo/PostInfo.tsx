@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import classNames from 'classnames';
 import { ClassNamesFn } from 'classnames/types';
+import { useHistory } from 'react-router-dom';
+import { History } from 'history';
 import { handleMomentParse } from 'lib/Moment';
 import { AiFillHeart } from 'react-icons/ai';
 import { GoCommentDiscussion } from 'react-icons/go';
@@ -12,6 +14,7 @@ const style = require('./PostInfo.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
+  id: number;
   nickname: string;
   code: number;
   created: string | Date;
@@ -21,10 +24,16 @@ interface PropTypes {
   isMenu: boolean;
 }
 
-const PostInfo = ({ nickname, code, created, like, comments, view, isMenu }: PropTypes): JSX.Element => {
+const PostInfo = ({ id, nickname, code, created, like, comments, view, isMenu }: PropTypes): JSX.Element => {
+  const history: History<unknown> = useHistory();
+
+  const handleUserPage = useCallback((): void => {
+    history.push(`/user/${id}`);
+  }, [history, id]);
+
   return (
     <div className={cx('PostInfo')}>
-      <div className={cx('PostInfo-Profile')}>
+      <div className={cx('PostInfo-Profile')} onClick={handleUserPage}>
         <img src={Profile} alt ='profile' className={cx('PostInfo-Profile-Image')} />
         <div className={cx('PostInfo-Profile-Name')}>{nickname}#{code}</div>
       </div>

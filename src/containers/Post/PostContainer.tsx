@@ -5,16 +5,13 @@ import { useParams } from 'react-router-dom';
 import Post from 'components/Post';
 import { IError } from 'util/types/Response';
 import PostLoading from 'components/Common/Loading/PostLoading';
+import { ParamTypes } from 'util/types/PostTypes';
 
 const PostContainer = observer((): JSX.Element => {
   const { store } = useStores();
   const { isLoading, handleClearInfo, postInfo, handleGetPost } = store.PostStore;
 
-  type paramTypes = {
-    idx: string | undefined;
-  };
-
-  const { idx }: paramTypes = useParams();
+  const { idx }: ParamTypes = useParams();
   const postIdx: number = Number(idx);
 
   const requestGetPost = useCallback(async (): Promise<void> => {

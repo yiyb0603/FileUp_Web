@@ -9,14 +9,12 @@ class CategoryStore extends InitialStore {
   @observable categoryList: ICategoryTypes[] = [];
 
   @action
-  handleCategoryList = async (): Promise<ICategoryList> => {
+  handleCategoryList = async (): Promise<void> => {
     try {
       const response: ICategoryList = await getResponse('/categories');
 
       const { object } = response;
       this.categoryList = object;
-
-      return response;
     } catch (error) {
       throw error;
     }

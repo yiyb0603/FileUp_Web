@@ -1,21 +1,15 @@
 import customTrim from "./CustomTrim";
 
-const isEmpty = (value: string | any): boolean => {
+export default (value: string | any): boolean => {
   if (Array.isArray(value)) {
     if (value.length <= 0) {
       return true;
     }
   }
 
-  if (customTrim(value).length <= 0) {
-    return true;
-  }
-
-  if (!value) {
+  if (customTrim(value).length <= 0 || !value) {
     return true;
   }
   
   return false;
 };
-
-export default isEmpty;
