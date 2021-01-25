@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = (): JSX.Element => {
-  const { Sign, Home, Post } = Pages;
+  const { Sign, Home, Post, User } = Pages;
 
   return (
     <>
@@ -13,6 +13,7 @@ const App = (): JSX.Element => {
         <Route exact path='/sign' component={Sign} />
         <Route exact path='/' component={Home} />
         <Route exact path='/post/:idx' component={Post} />
+        <Route exact path='/user/:id' component={User} />
       </Switch>
 
       <ToastContainer

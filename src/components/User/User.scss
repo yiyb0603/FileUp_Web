@@ -1,1 +1,53 @@
-/* your css code */
+.User {
+	width: 100%;
+	max-width: 1200px;
+	margin: 2rem auto;
+
+	&-Info {
+		display: flex;
+		display: -webkit-flex;
+		justify-content: space-between;
+		padding: 0 2rem;
+
+		&-Left {
+			display: flex;
+			display: -webkit-flex;
+			align-items: flex-start;
+			flex: 3;
+
+			&-Profile {
+				position: relative;
+				margin-right: 20px;
+
+				& > img {
+					width: 160px;
+					height: 160px;
+					border-radius: 50%;
+					object-fit: cover;
+					border: none;
+					outline: none;
+				}
+			}
+
+			&-Names {
+				margin-top: 1rem;
+
+				& > * {
+					margin-bottom: 8px;
+				}
+
+				&-Name {
+					font-size: 18px;
+				}
+			}
+		}
+
+		&-Right {
+			display: flex;
+			display: -webkit-flex;
+			justify-content: space-between;
+			margin-top: 1rem;
+			flex: 1;
+		}
+	}
+}

@@ -5,6 +5,7 @@ import Logo from 'assets/icons/Logo/Logo.svg';
 import Write from 'assets/icons/Home/Write.svg';
 import Profile from 'assets/icons/Home/profile_default.jpg';
 import Logout from 'assets/icons/Home/Logout.svg';
+import getMyInfo from 'util/getMyInfo';
 
 const style = require('./Header.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -15,6 +16,8 @@ interface PropTypes {
 };
 
 const Header = ({ moveLocation, onLogout }: PropTypes): JSX.Element => {
+  const myInfo: any = getMyInfo();
+
   return (
     <div className={cx('Header')}>
       <div className={cx('Header-Contents')}>
@@ -22,7 +25,7 @@ const Header = ({ moveLocation, onLogout }: PropTypes): JSX.Element => {
 
         <div className={cx('Header-Contents-Right')}>
           <img src={Write} alt ='Write' />
-          <img src={Profile} alt ='Profile' />
+          <img src={Profile} alt ='Profile' onClick={() => moveLocation(`/user/${myInfo.id}`)} />
           <img src={Logout} alt ='Logout' onClick={onLogout} />
         </div>
       </div>

@@ -13,7 +13,7 @@ class PostStore extends InitialStore {
   @observable postInfo: IPostViewResObj | null = null;
 
   @action
-  public handleGetPosts = async (): Promise<IPostList> => {
+  public handleGetPosts = async (): Promise<void> => {
     try {
       this.postList = [];
       this.isLoading = true;
@@ -29,8 +29,6 @@ class PostStore extends InitialStore {
         this.postList = this.postList.concat(posts);
       }
       this.isLoading = false;
-      
-      return response;
     } catch (error) {
       this.isLoading = false;
       throw error;
@@ -38,7 +36,7 @@ class PostStore extends InitialStore {
   }
 
   @action
-  public handleGetPost = async (idx: number) => {
+  public handleGetPost = async (idx: number): Promise<void> => {
     try {
       this.isLoading = true;
       const response: IPostViewRes = await getResponse(`/posts/data/${idx}`, getToken());
@@ -46,8 +44,6 @@ class PostStore extends InitialStore {
 
       this.postInfo = object;
       this.isLoading = false;
-
-      return response;
     } catch (error) {
       this.isLoading = false;
       throw error;

@@ -15,6 +15,10 @@ interface IPaletteTypes {
 	black: string;
 	snow: string;
 	main: string;
+
+	bronze: string;
+	silver: string;
+	gold: string;
 }
 
 export const Palette: IPaletteTypes = {
@@ -34,4 +38,8 @@ export const Palette: IPaletteTypes = {
 	black: '#000000',
 	snow: '#dff9fb',
 	main: '#5982c8',
+
+	bronze: '#cd7f32',
+	silver: '#c0c0c0',
+	gold: '#ffd700',
 };

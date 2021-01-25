@@ -23,6 +23,7 @@ const FeedBottom = ({ id, author, comments, created, updated, like, view }: Prop
   return (
     <div className={cx('FeedBottom')}>
       <PostInfo
+        id={author.id}
         nickname={nickname}
         code={code}
         created={created}

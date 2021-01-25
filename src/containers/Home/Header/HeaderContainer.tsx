@@ -18,7 +18,10 @@ const HeaderContainer = (): JSX.Element => {
   }, [moveLocation]);
 
   return (
-    <Header moveLocation={moveLocation} onLogout={onLogout} />
+    <Header
+      moveLocation={moveLocation}
+      onLogout={onLogout}
+    />
   );
 };
 

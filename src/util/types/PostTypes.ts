@@ -4,6 +4,11 @@ import { IFileType } from './FileTypes';
 import { IResponse } from './Response';
 import { IUserTypes } from './UserTypes';
 
+export interface ParamTypes {
+  idx: string | undefined;
+  id: string | undefined;
+};
+
 export interface IPostList extends IResponse {
   object: {
     maxPage: number;
