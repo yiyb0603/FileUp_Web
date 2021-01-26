@@ -16,9 +16,13 @@ class PostStore extends InitialStore {
   @action
   public handleWritePost = async (request: FormData): Promise<IResponse> => {
     try {
+      this.isLoading = true;
       const response: IResponse = await postRequest('/posts/upload', request, getToken());
+      this.isLoading = false;
+
       return response;
     } catch (error) {
+      this.isLoading = false;
       throw error;
     }
   }

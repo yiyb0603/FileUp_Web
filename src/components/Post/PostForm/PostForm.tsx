@@ -5,11 +5,14 @@ import PostCategory from './PostCategory';
 import { ICategoryTypes } from 'util/types/CategoryTypes';
 import PostFile from 'components/Common/Post/PostFile';
 import { ISelectFile } from 'util/types/PostTypes';
+import AuthSpinner from 'components/Common/Auth/AuthSpinner';
 
 const style = require('./PostForm.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
+  isLoading: boolean;
+
   titleObject: {
     title: string;
     onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -36,6 +39,7 @@ interface PropTypes {
 }
 
 const PostForm = ({
+  isLoading,
   titleObject,
   contentObject,
   categoryObject,
@@ -101,7 +105,9 @@ const PostForm = ({
         <button
           className={cx('PostForm-UploadWrap-Button')}
           onClick={requestWritePost}>
-          업로드
+          {
+            isLoading ? <AuthSpinner /> : <div>업로드</div>
+          }
         </button>
       </div>
     </div>

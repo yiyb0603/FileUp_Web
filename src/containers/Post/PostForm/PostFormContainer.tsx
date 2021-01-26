@@ -12,11 +12,12 @@ import useStores from 'lib/hooks/useStores';
 import groupingState from 'converter/GroupingState';
 import { IError, IResponse } from 'util/types/Response';
 import { ISelectFile } from 'util/types/PostTypes';
+import { postWriteValidation } from 'validation/Post/PostValidation';
 
 const PostFormContainer = observer((): JSX.Element => {
   const { store } = useStores();
   const { categoryList, handleCategoryList } = store.CategoryStore;
-  const { handleWritePost } = store.PostStore;
+  const { isLoading, handleWritePost } = store.PostStore;
 
   const fileId: MutableRefObject<number> = useRef(0);
   const [title, setTitle] = useState<string>('');
@@ -56,10 +57,14 @@ const PostFormContainer = observer((): JSX.Element => {
   }, [files]);
 
   const handleFilterFile = useCallback((id: number): void => {
-    setFiles(files.filter((file) => file.id !== id));
+    setFiles(files.filter((file: ISelectFile) => file.id !== id));
   }, [files]);
 
   const requestWritePost = useCallback(async (): Promise<void> => {
+    if (!postWriteValidation({ title, content, category })) {
+      return;
+    }
+
     const formData: FormData = new FormData();
     formData.append("post.title", title);
     formData.append("post.content", content);
@@ -85,6 +90,7 @@ const PostFormContainer = observer((): JSX.Element => {
   
   return (
     <PostForm
+      isLoading={isLoading}
       titleObject={groupingState('title', title, onChangeTitle)}
       contentObject={groupingState('content', content, onChangeContent)}
       categoryObject={groupingState('category', category, onChangeCategory)}

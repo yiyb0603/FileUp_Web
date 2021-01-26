@@ -1,3 +1,10 @@
+@mixin alignCenter() {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .PostForm {
 	width: 100%;
 	max-width: 1000px;
@@ -30,10 +37,8 @@
 		height: 70px;
 		max-height: 70px;
 		margin-top: 1rem;
-		display: flex;
-		display: -webkit-flex;
-		justify-content: center;
-		align-items: center;
+
+		@include alignCenter();
 		border: 1px solid var(--main);
 		border-radius: 5px;
 		cursor: pointer;
@@ -51,6 +56,8 @@
 			outline: none;
 			border: none;
 			border-radius: 25px;
+
+			@include alignCenter();
 			color: var(--white);
 			background-color: var(--main);
 			cursor: pointer;
