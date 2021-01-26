@@ -1,9 +1,10 @@
 import { autobind } from 'core-decorators';
-import { getResponse } from 'lib/Axios';
+import { getResponse, postRequest } from 'lib/Axios';
 import { action, observable } from 'mobx';
 import InitialStore from 'stores/Initial';
 import { getToken } from 'util/Token';
 import { IPostList, IPostView, IPostViewRes, IPostViewResObj } from 'util/types/PostTypes';
+import { IResponse } from 'util/types/Response';
 
 @autobind
 class PostStore extends InitialStore {
@@ -11,6 +12,16 @@ class PostStore extends InitialStore {
   @observable maxCount: number = 0;
   @observable postList: IPostView[] = [];
   @observable postInfo: IPostViewResObj | null = null;
+
+  @action
+  public handleWritePost = async (request: FormData): Promise<IResponse> => {
+    try {
+      const response: IResponse = await postRequest('/posts/upload', request, getToken());
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   @action
   public handleGetPosts = async (): Promise<void> => {

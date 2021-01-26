@@ -1,0 +1,59 @@
+.PostForm {
+	width: 100%;
+	max-width: 1000px;
+	margin: 2rem auto;
+
+	&-Title {
+		width: 100%;
+		outline: none;
+		border: none;
+		border-bottom: 1px solid var(--gray);
+		padding: 0 4px 8px 4px;
+		font-size: 18px;
+		font-weight: bold;
+
+		&::placeholder {
+			color: var(--black);
+		}
+	}
+
+	&-Contents {
+		width: 100%;
+		height: 300px;
+		max-height: 300px;
+		overflow: auto;
+		padding: 6px;
+		resize: none;
+	}
+
+	&-SelectFile {
+		height: 70px;
+		max-height: 70px;
+		margin-top: 1rem;
+		display: flex;
+		display: -webkit-flex;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid var(--main);
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	&-UploadWrap {
+		display: flex;
+		display: -webkit-flex;
+		justify-content: flex-end;
+		margin-top: 12px;
+
+		&-Button {
+			width: 100px;
+			height: 40px;
+			outline: none;
+			border: none;
+			border-radius: 25px;
+			color: var(--white);
+			background-color: var(--main);
+			cursor: pointer;
+		}
+	}
+}
