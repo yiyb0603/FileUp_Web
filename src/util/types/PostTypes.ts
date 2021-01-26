@@ -9,6 +9,11 @@ export interface ParamTypes {
   id: string | undefined;
 };
 
+export interface ISelectFile {
+  id: number;
+  object: File;
+}
+
 export interface IPostList extends IResponse {
   object: {
     maxPage: number;

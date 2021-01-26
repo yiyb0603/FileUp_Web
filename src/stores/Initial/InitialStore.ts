@@ -4,7 +4,7 @@ import { observable } from "mobx";
 @autobind
 class InitialStore {
   @observable
-  protected isLoading: boolean = false;
+  public isLoading: boolean = false;
 }
 
 export default InitialStore;

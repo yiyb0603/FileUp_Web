@@ -24,7 +24,7 @@ const Header = ({ moveLocation, onLogout }: PropTypes): JSX.Element => {
         <img className={cx('Header-Contents-Logo')} src={Logo} alt='Logo' onClick={() => moveLocation('/')} />
 
         <div className={cx('Header-Contents-Right')}>
-          <img src={Write} alt ='Write' />
+          <img src={Write} alt ='Write' onClick={() => moveLocation('/postform')} />
           <img src={Profile} alt ='Profile' onClick={() => moveLocation(`/user/${myInfo.id}`)} />
           <img src={Logout} alt ='Logout' onClick={onLogout} />
         </div>
