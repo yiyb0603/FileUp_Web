@@ -3,10 +3,12 @@ import { autobind } from 'core-decorators';
 import { action, observable } from 'mobx';
 import { getResponse } from 'lib/Axios';
 import { IUserResponse, IUserResponseInfo } from 'util/types/UserTypes';
+import { IPostView } from 'util/types/PostTypes';
 
 @autobind
 class UserStore extends InitialStore {
   @observable userInfo: IUserResponseInfo | null = null;
+  @observable userPostList: IPostView[] = [];
 
   @action
   handleGetUserInfo = async (id: number): Promise<void> => {
@@ -14,8 +16,11 @@ class UserStore extends InitialStore {
       this.isLoading = true;
 
       const response: IUserResponse = await getResponse(`/users/${id}`);
+      const { postList } = response.object;
+
       this.userInfo = response.object;
-      
+      this.userPostList = postList;
+
       this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
@@ -26,6 +31,7 @@ class UserStore extends InitialStore {
   @action
   handleClearInfo = (): void => {
     this.userInfo = null;
+    this.userPostList = [];
   }
 }
 

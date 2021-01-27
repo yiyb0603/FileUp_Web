@@ -15,21 +15,23 @@ const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
   id: number;
+  userId: number;
   nickname: string;
   code: number;
   created: string | Date;
+  updated: string | Date | null;
   like: number;
   comments: number;
   view: number;
   isMenu: boolean;
 }
 
-const PostInfo = ({ id, nickname, code, created, like, comments, view, isMenu }: PropTypes): JSX.Element => {
+const PostInfo = ({ id, userId, nickname, code, created, updated, like, comments, view, isMenu }: PropTypes): JSX.Element => {
   const history: History<unknown> = useHistory();
 
   const handleUserPage = useCallback((): void => {
-    history.push(`/user/${id}`);
-  }, [history, id]);
+    history.push(`/user/${userId}`);
+  }, [history, userId]);
 
   return (
     <div className={cx('PostInfo')}>

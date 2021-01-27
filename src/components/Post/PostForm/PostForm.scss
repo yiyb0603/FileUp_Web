@@ -42,6 +42,30 @@
 		border: 1px solid var(--main);
 		border-radius: 5px;
 		cursor: pointer;
+		transition: 0.16s ease-in-out;
+
+		&:hover {
+			background-color: var(--main);
+			color: var(--white);
+		}
+	}
+
+	&-Files {
+		margin: 10px 0;
+		padding: 0 6px;
+		max-height: 250px;
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			width: 6px;
+			background-color: var(--lighterGray);
+			border-radius: 10px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 10px;
+			background-color: var(--main);
+		}
 	}
 
 	&-UploadWrap {

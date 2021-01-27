@@ -50,10 +50,12 @@ const Post = ({ postInfo }: PropTypes): JSX.Element => {
 
       <div className={cx('Post-Info')}>
         <PostInfo
-          id={author.id}
+          id={id}
           nickname={nickname}
+          userId={author.id}
           code={code}
           created={created}
+          updated={updated}
           like={like}
           comments={comments.length}
           view={view}

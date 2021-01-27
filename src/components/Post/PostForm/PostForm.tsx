@@ -86,6 +86,7 @@ const PostForm = ({
         <div>파일 첨부</div>
       </label>
 
+      <div className={cx('PostForm-Files')}>
       {
         files.map((file: ISelectFile) => {
           const { id, object: { name } } = file;
@@ -100,11 +101,13 @@ const PostForm = ({
           )
         })
       }
+      </div>
 
       <div className={cx('PostForm-UploadWrap')}>
         <button
           className={cx('PostForm-UploadWrap-Button')}
-          onClick={requestWritePost}>
+          onClick={requestWritePost}
+        >
           {
             isLoading ? <AuthSpinner /> : <div>업로드</div>
           }
