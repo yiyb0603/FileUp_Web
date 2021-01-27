@@ -13,6 +13,7 @@
 .PostInfo {
 	@include flexStyle();
 	justify-content: space-between;
+	margin-top: 12px;
 
 	&-Profile {
 		@include flexStyle();

@@ -5,7 +5,7 @@ import HomeLoading from '../HomeLoading';
 const UserLoading = (): JSX.Element => {
   const wrapperStyle: CSSProperties = {
     width: '100%',
-    maxWidth: '1200px',
+    maxWidth: '1100px',
     margin: '2rem auto',
   }
   

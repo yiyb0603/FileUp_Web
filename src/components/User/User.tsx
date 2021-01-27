@@ -6,15 +6,18 @@ import InfoTopic from './InfoTopic';
 import { IUserResponseInfo } from 'util/types/UserTypes';
 import rankStyle from 'util/RankStyle';
 import ProfileRank from './ProfileRank';
+import { IPostView } from 'util/types/PostTypes';
+import FeedItem from 'components/Common/Post/FeedItem';
 
 const style = require('./User.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
   userInfo: IUserResponseInfo;
+  userPostList: IPostView[];
 }
 
-const User = ({ userInfo }: PropTypes): JSX.Element => {
+const User = ({ userInfo, userPostList }: PropTypes): JSX.Element => {
   const { id, email, code, rank, nickname, postList, followedList, followingList } = userInfo;
   const rankColor: string = rankStyle(rank);
 
@@ -47,6 +50,17 @@ const User = ({ userInfo }: PropTypes): JSX.Element => {
           <InfoTopic title="팔로워" count={followedList.length} />
           <InfoTopic title="팔로잉" count={followingList.length} />
         </div>
+      </div>
+
+      <div className={cx('User-PostList')}>
+        {
+          userPostList.map((post: IPostView) => (
+            <FeedItem
+              key={post.id}
+              post={post}
+            />
+          ))
+        }
       </div>
     </div>
   );

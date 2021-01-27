@@ -1,6 +1,6 @@
 .User {
 	width: 100%;
-	max-width: 1200px;
+	max-width: 1100px;
 	margin: 2rem auto;
 
 	&-Info {
@@ -49,5 +49,9 @@
 			margin-top: 1rem;
 			flex: 1;
 		}
+	}
+
+	&-PostList {
+		margin-top: 2rem;
 	}
 }
