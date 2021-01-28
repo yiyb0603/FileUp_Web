@@ -4,7 +4,7 @@ import { action, observable } from 'mobx';
 import InitialStore from 'stores/Initial';
 import { getToken } from 'util/Token';
 import { IPostList, IPostView, IPostViewRes, IPostViewResObj } from 'util/types/PostTypes';
-import { IResponse } from 'util/types/Response';
+import { IPostSuccessRes } from 'util/types/Response';
 
 @autobind
 class PostStore extends InitialStore {
@@ -14,10 +14,10 @@ class PostStore extends InitialStore {
   @observable postInfo: IPostViewResObj | null = null;
 
   @action
-  public handleWritePost = async (request: FormData): Promise<IResponse> => {
+  public handleWritePost = async (request: FormData): Promise<IPostSuccessRes> => {
     try {
       this.isLoading = true;
-      const response: IResponse = await postRequest('/posts/upload', request, getToken());
+      const response: IPostSuccessRes = await postRequest('/posts/upload', request, getToken());
       this.isLoading = false;
 
       return response;

@@ -17,6 +17,9 @@
 	}
 
 	&-Contents {
+		word-break: break-all;
+		white-space: pre-wrap;
+
 		& > img {
 			width: 100%;
 			max-width: 100%;

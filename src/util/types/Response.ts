@@ -3,6 +3,12 @@ export interface IResponse {
   message: string;
 }
 
+export interface IPostSuccessRes extends IResponse {
+  object: {
+    id: number;
+  };
+};
+
 export interface IError {
   response: {
     data: {
