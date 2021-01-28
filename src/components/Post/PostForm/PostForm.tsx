@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, MutableRefObject } from 'react';
 import classNames from 'classnames';
 import { ClassNamesFn } from 'classnames/types';
 import PostCategory from './PostCategory';
@@ -12,6 +12,8 @@ const cx: ClassNamesFn = classNames.bind(style);
 
 interface PropTypes {
   isLoading: boolean;
+  isDragging: boolean;
+  dragRef: MutableRefObject<HTMLLabelElement | null>;
 
   titleObject: {
     title: string;
@@ -40,6 +42,8 @@ interface PropTypes {
 
 const PostForm = ({
   isLoading,
+  isDragging,
+  dragRef,
   titleObject,
   contentObject,
   categoryObject,
@@ -48,6 +52,7 @@ const PostForm = ({
   handleFilterFile,
   requestWritePost,
 } : PropTypes): JSX.Element => {
+
   const { title, onChangeTitle } = titleObject;
   const { content, onChangeContent } = contentObject;
   const { files, onChangeFiles } = filesObject;
@@ -82,13 +87,19 @@ const PostForm = ({
         style={{ display: 'none' }}
       />
 
-      <label htmlFor='fileInput' className={cx('PostForm-SelectFile')}>
+      <label
+        htmlFor='fileInput'
+        className={cx('PostForm-SelectFile', {
+          'PostForm-SelectFile-Dragging': isDragging,
+        })}
+        ref={dragRef}
+      >
         <div>파일 첨부</div>
       </label>
 
       <div className={cx('PostForm-Files')}>
       {
-        files.map((file: ISelectFile) => {
+        files.length > 0 && files.map((file: ISelectFile) => {
           const { id, object: { name } } = file;
 
           return (

@@ -44,6 +44,11 @@
 		cursor: pointer;
 		transition: 0.16s ease-in-out;
 
+		&-Dragging {
+			background-color: var(--main);
+			color: var(--white);
+		}
+
 		&:hover {
 			background-color: var(--main);
 			color: var(--white);

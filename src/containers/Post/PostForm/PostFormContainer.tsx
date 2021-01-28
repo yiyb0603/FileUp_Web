@@ -7,19 +7,27 @@ import React, {
   useState
 } from 'react';
 import { observer } from 'mobx-react';
+import { useHistory } from 'react-router-dom';
+import { History } from 'history';
 import PostForm from 'components/Post/PostForm';
 import useStores from 'lib/hooks/useStores';
 import groupingState from 'converter/GroupingState';
-import { IError, IResponse } from 'util/types/Response';
+import { IError, IPostSuccessRes } from 'util/types/Response';
 import { ISelectFile } from 'util/types/PostTypes';
 import { postWriteValidation } from 'validation/Post/PostValidation';
+import { successToast } from 'lib/Toast';
 
 const PostFormContainer = observer((): JSX.Element => {
   const { store } = useStores();
   const { categoryList, handleCategoryList } = store.CategoryStore;
   const { isLoading, handleWritePost } = store.PostStore;
 
+  const history: History<unknown> = useHistory();
   const fileId: MutableRefObject<number> = useRef(0);
+  const dragRef = useRef<HTMLLabelElement>(null);
+
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [category, setCategory] = useState<string>('');
@@ -39,9 +47,15 @@ const PostFormContainer = observer((): JSX.Element => {
     setCategory(categoryName);
   }, []);
 
-  const onChangeFiles = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
-    const selectFiles = e.target.files!;
+  const onChangeFiles = useCallback((e: ChangeEvent<HTMLInputElement> | any): void => {
+    let selectFiles: File[] = [];
     let tempFiles: ISelectFile[] = files;
+
+    if (e.type === 'drop') {
+      selectFiles = e.dataTransfer.files;
+    } else {
+      selectFiles = e.target.files;
+    }
 
     for (const file of selectFiles) {
       tempFiles = [
@@ -75,14 +89,72 @@ const PostFormContainer = observer((): JSX.Element => {
     }
 
     await handleWritePost(formData)
-    .then((response: IResponse) => {
-      console.log(response);
+    .then((response: IPostSuccessRes) => {
+      const { status, object: { id } } = response;
+      
+      if (status === 200) {
+        successToast('글을 작성하였습니다.');
+        history.push(`/post/${id}`);
+      }
     })
 
     .catch((error: IError) => {
       console.log(error);
     });
-  }, [category, content, files, handleWritePost, title]);
+  }, [category, content, files, handleWritePost, history, title]);
+
+  const handleDragIn = useCallback((e: DragEvent): void => {
+    e.preventDefault(); 
+    e.stopPropagation();
+  }, []);
+
+  const handleDragOut = useCallback((e: DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setIsDragging(false);
+  }, []);
+
+  const handleDragOver = useCallback((e: DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.dataTransfer!.files) {
+      setIsDragging(true);
+    }
+  }, []);
+
+  const handleDrop = useCallback((e: DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    onChangeFiles(e);
+    setIsDragging(false);
+  }, [onChangeFiles]);
+
+  const initDragEvents = useCallback((): void => {
+    if (dragRef.current !== null) {
+      dragRef.current.addEventListener('dragenter', handleDragIn);
+      dragRef.current.addEventListener('dragleave', handleDragOut);
+      dragRef.current.addEventListener('dragover', handleDragOver);
+      dragRef.current.addEventListener('drop', handleDrop);
+    }
+  }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
+
+  const resetDragEvents = useCallback((): void => {
+    if (dragRef.current !== null) {
+      dragRef.current.removeEventListener('dragenter', handleDragIn);
+      dragRef.current.removeEventListener('dragleave', handleDragOut);
+      dragRef.current.removeEventListener('dragover', handleDragOver);
+      dragRef.current.removeEventListener('drop', handleDrop);
+    }
+  }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
+
+  useEffect(() => {
+    initDragEvents();
+
+    return () => resetDragEvents();
+  }, [initDragEvents, resetDragEvents]);
 
   useEffect(() => {
     handleCategoryList();
@@ -91,6 +163,8 @@ const PostFormContainer = observer((): JSX.Element => {
   return (
     <PostForm
       isLoading={isLoading}
+      isDragging={isDragging}
+      dragRef={dragRef}
       titleObject={groupingState('title', title, onChangeTitle)}
       contentObject={groupingState('content', content, onChangeContent)}
       categoryObject={groupingState('category', category, onChangeCategory)}
