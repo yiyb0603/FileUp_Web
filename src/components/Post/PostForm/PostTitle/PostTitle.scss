@@ -1,0 +1,13 @@
+.PostTitle {
+	width: 100%;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid var(--gray);
+	padding: 0 4px 8px 4px;
+	font-size: 18px;
+	font-weight: bold;
+
+	&::placeholder {
+		color: var(--black);
+	}
+}

@@ -1,0 +1,19 @@
+@mixin alignCenter() {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.PostSubmit {
+	width: 100px;
+	height: 40px;
+	outline: none;
+	border: none;
+	border-radius: 25px;
+
+	@include alignCenter();
+	color: var(--white);
+	background-color: var(--main);
+	cursor: pointer;
+}

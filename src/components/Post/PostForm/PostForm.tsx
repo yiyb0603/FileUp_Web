@@ -5,7 +5,10 @@ import PostCategory from './PostCategory';
 import { ICategoryTypes } from 'util/types/CategoryTypes';
 import PostFile from 'components/Common/Post/PostFile';
 import { ISelectFile } from 'util/types/PostTypes';
-import AuthSpinner from 'components/Common/Auth/AuthSpinner';
+import PostTitle from './PostTitle';
+import PostContents from './PostContents';
+import FileSelect from './FileSelect';
+import PostSubmit from './PostSubmit';
 
 const style = require('./PostForm.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -52,19 +55,12 @@ const PostForm = ({
   handleFilterFile,
   requestWritePost,
 } : PropTypes): JSX.Element => {
-
-  const { title, onChangeTitle } = titleObject;
-  const { content, onChangeContent } = contentObject;
   const { files, onChangeFiles } = filesObject;
 
   return (
     <div className={cx('PostForm')}>
-      <input
-        type='text'
-        value={title}
-        onChange={onChangeTitle}
-        className={cx('PostForm-Title')}
-        placeholder='제목을 입력해주세요.'
+      <PostTitle
+        titleObject={titleObject}
       />
 
       <PostCategory
@@ -72,12 +68,9 @@ const PostForm = ({
         categoryList={categoryList}
       />
 
-      <textarea
-        className={cx('PostForm-Contents')}
-        value={content}
-        onChange={onChangeContent}
-        placeholder='내용을 입력해주세요'
-      ></textarea>
+      <PostContents
+        contentObject={contentObject}
+      />
 
       <input
         id='fileInput'
@@ -87,15 +80,10 @@ const PostForm = ({
         style={{ display: 'none' }}
       />
 
-      <label
-        htmlFor='fileInput'
-        className={cx('PostForm-SelectFile', {
-          'PostForm-SelectFile-Dragging': isDragging,
-        })}
-        ref={dragRef}
-      >
-        <div>파일 첨부</div>
-      </label>
+      <FileSelect
+        isDragging={isDragging}
+        dragRef={dragRef}
+      />
 
       <div className={cx('PostForm-Files')}>
       {
@@ -115,14 +103,10 @@ const PostForm = ({
       </div>
 
       <div className={cx('PostForm-UploadWrap')}>
-        <button
-          className={cx('PostForm-UploadWrap-Button')}
-          onClick={requestWritePost}
-        >
-          {
-            isLoading ? <AuthSpinner /> : <div>업로드</div>
-          }
-        </button>
+        <PostSubmit
+          isLoading={isLoading}
+          requestWritePost={requestWritePost}
+        />
       </div>
     </div>
   );
