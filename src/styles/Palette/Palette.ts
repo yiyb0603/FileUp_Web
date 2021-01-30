@@ -5,7 +5,7 @@ interface IPaletteTypes {
 	green: string;
 	blue: string;
 	skyBlue: string;
-	indigo: string;
+	navy: string;
 	purple: string;
 	pink: string;
 	mint: string;
@@ -28,7 +28,7 @@ export const Palette: IPaletteTypes = {
 	green: '#27ae60',
 	blue: '#0984e3',
 	skyBlue: '#75A4F5',
-	indigo: '#192a56',
+	navy: '#000080',
 	purple: '#6c5ce7',
 	mint: '#00d2d3',
 	pink: '#e84393',
