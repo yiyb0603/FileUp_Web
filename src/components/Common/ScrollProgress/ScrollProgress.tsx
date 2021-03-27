@@ -14,30 +14,33 @@ const ScrollProgress = memo((): JSX.Element => {
       const { scrollWidth } = progressRef.current;
       const { clientX } = e;
 
-      const selectedPercent: number = (clientX / scrollWidth) * 100;
+      const selectedPercent: number = ((clientX / scrollWidth) * 100);
       setWidth(selectedPercent);
       
-      const { innerHeight } = window;
-      const { scrollHeight } = document.body;
+      const { scrollHeight, clientHeight } = document.body;
+      const windowHeight: number = scrollHeight - clientHeight;
 
-      const moveScrollPercent: number = ((scrollHeight * selectedPercent) / 100) - innerHeight;
+      const moveScrollPercent: number = ((windowHeight * selectedPercent) / 100);
 
       window.scrollTo({
         top: moveScrollPercent,
         behavior: 'smooth',
-      })
+      });
     }
   }, []);
 
   const handleScroll = useCallback((): void => {
-    const { innerHeight } = window;
-    const { scrollHeight } = document.body;
-    const { scrollTop } = document.documentElement;
-    
-    const scrollPosition: number = Math.round(scrollTop + innerHeight);
-    const currentPercent: number = (scrollPosition / scrollHeight) * 100;
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    setWidth(currentPercent);
+    if (scrollTop === 0) {
+      setWidth(0);
+      return;
+    }
+
+    const windowHeight: number = scrollHeight - clientHeight;
+    const currentPercent: number = (scrollTop / windowHeight);
+
+    setWidth(currentPercent * 100);
   }, []);
   
   useEffect(() => {
@@ -50,7 +53,7 @@ const ScrollProgress = memo((): JSX.Element => {
 
   return (
     <div className={cx('ScrollProgress')} ref={progressRef} onClick={handleProgressMove}>
-      <div className={cx('ScrollProgress-Progress')} style={{ width: width + '%', }} ></div>
+      <div className={cx('ScrollProgress-Progress')} style={{ width: width + '%' }} ></div>
     </div>
   );
 });

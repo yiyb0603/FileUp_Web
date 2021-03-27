@@ -4,7 +4,7 @@ import { ClassNamesFn } from 'classnames/types';
 import ScrollTop from 'components/Common/PageItems/ScrollTop';
 import HeaderContainer from 'containers/Home/Header';
 import Footer from 'components/Common/PageItems/Footer';
-import ScrollProgress from 'components/Common/PageItems/ScrollProgress';
+import ScrollProgress from 'components/Common/ScrollProgress';
 
 const style = require('./PageTemplate.scss');
 const cx: ClassNamesFn = classNames.bind(style);

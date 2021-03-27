@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MutableRefObject } from 'react';
+import React, { ChangeEvent, KeyboardEvent, MutableRefObject } from 'react';
 import classNames from 'classnames';
 import { ClassNamesFn } from 'classnames/types';
 import PostCategory from './PostCategory';
@@ -9,6 +9,7 @@ import PostTitle from './PostTitle';
 import PostContents from './PostContents';
 import FileSelect from './FileSelect';
 import PostSubmit from './PostSubmit';
+import TagInput from './TagInput';
 
 const style = require('./PostForm.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -40,6 +41,15 @@ interface PropTypes {
 
   categoryList: ICategoryTypes[];
   handleFilterFile: (id: number) => void;
+  
+  tags: string[];
+  tagInputObject: {
+    tagInput: string;
+    onChangeTagInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  };
+
+  onKeydownTagInput: (e: KeyboardEvent<HTMLInputElement>) => void;
+  handleFilterTag: (tag: string) => void;
   requestWritePost: () => Promise<void>;
 }
 
@@ -53,6 +63,10 @@ const PostForm = ({
   filesObject,
   categoryList,
   handleFilterFile,
+  tags,
+  tagInputObject,
+  onKeydownTagInput,
+  handleFilterTag,
   requestWritePost,
 } : PropTypes): JSX.Element => {
   const { files, onChangeFiles } = filesObject;
@@ -63,10 +77,19 @@ const PostForm = ({
         titleObject={titleObject}
       />
 
-      <PostCategory
-        categoryObject={categoryObject}
-        categoryList={categoryList}
-      />
+      <div className={cx('PostForm-TagCategory')}>
+        <TagInput
+          tags={tags}
+          tagInputObject={tagInputObject}
+          onKeydownTagInput={onKeydownTagInput}
+          handleFilterTag={handleFilterTag}
+        />
+
+        <PostCategory
+          categoryObject={categoryObject}
+          categoryList={categoryList}
+        />
+      </div>
 
       <PostContents
         contentObject={contentObject}
@@ -88,7 +111,7 @@ const PostForm = ({
       <div className={cx('PostForm-Files')}>
       {
         files.length > 0 && files.map((file: ISelectFile) => {
-          const { id, object: { name } } = file;
+          const { id, file: { name } } = file;
 
           return (
             <PostFile

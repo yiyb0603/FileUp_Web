@@ -11,7 +11,7 @@ export interface ParamTypes {
 
 export interface ISelectFile {
   id: number;
-  object: File;
+  file: File;
 }
 
 export interface IPostList extends IResponse {
