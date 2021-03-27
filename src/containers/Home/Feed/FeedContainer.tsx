@@ -24,12 +24,11 @@ const FeedContainer = observer((): JSX.Element => {
     if (Math.round(scrollTop + innerHeight) === scrollHeight) {
       handleIncreaseCount(null);
 
-      if (count < maxCount - 1) {
-        alert('aaa');
-        requestPostList();
-      }
+      // if (count < maxCount - 1) {
+      //   requestPostList();
+      // }
     }
-	}, [count, handleIncreaseCount, maxCount, requestPostList]);
+	}, [handleIncreaseCount]);
 
   useEffect(() => {
     requestPostList();

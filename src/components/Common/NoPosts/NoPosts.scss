@@ -1,0 +1,17 @@
+.NoPosts {
+	display: flex;
+	display: -webkit-flex;
+	flex-flow: column wrap;
+	align-items: center;
+	margin-top: 4rem;
+
+	&-Image {
+		width: 50%;
+	}
+
+	&-Text {
+		text-align: center;
+		font-size: 1.45rem;
+		margin-top: 1.5rem;
+	}
+}

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import classNames from 'classnames';
-import { ClassNamesFn } from "classnames/types";
+import { ClassNamesFn } from 'classnames/types';
 
-const style = require("./CommentItem.scss");
+const style = require('./CommentItem.scss');
 const cx: ClassNamesFn = classNames.bind(style);
 
 const CommentItem = (): JSX.Element => {

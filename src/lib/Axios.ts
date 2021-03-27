@@ -1,71 +1,45 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { SERVER } from 'config/config.json';
+import { getToken } from 'util/Token';
 
-export const getResponse = async (
-	url: string,
-	token?: string | null | undefined
-) => {
+const customAxios: AxiosInstance = axios.create({
+	baseURL: SERVER,
+	headers: {
+		'Access-Control-Allow-Origin': '*',
+		Token: getToken(),
+	},
+});
+
+export const getResponse = async (url: string) => {
 	try {
-		const { data }: AxiosResponse = await axios.get(`${SERVER}${url}`, {
-			headers: token && {
-				token,
-			},
-		});
+		const { data }: AxiosResponse = await customAxios.get(url);
 		return data;
 	} catch (error) {
 		throw error;
 	}
 };
 
-export const postRequest = async (
-	url: string,
-	request: any,
-	token?: string | null | undefined
-) => {
+export const postRequest = async (url: string, request: any) => {
 	try {
-		const { data }: AxiosResponse = await axios.post(
-			`${SERVER}${url}`,
-			request,
-			{
-				headers: token && {
-					token,
-				},
-			}
-		);
+		const { data }: AxiosResponse = await customAxios.post(url, request);
 		return data;
 	} catch (error) {
 		throw error;
 	}
 };
 
-export const modifyRequest = async (
-	url: string,
-	request: any,
-	token?: string | null
-) => {
+export const modifyRequest = async (url: string, request: any) => {
 	try {
-		const { data }: AxiosResponse = await axios.put(
-			`${SERVER}${url}`,
-			request,
-			{
-				headers: token && {
-					token,
-				},
-			}
-		);
+		const { data }: AxiosResponse = await customAxios.put(url, request);
 		return data;
 	} catch (error) {
 		throw error;
 	}
 };
 
-export const deleteRequest = async (url: string, token?: string | null) => {
+export const deleteRequest = async (url: string) => {
 	try {
-		const { data }: AxiosResponse = await axios.delete(`${SERVER}${url}`, {
-			headers: token && {
-				token,
-			},
-		});
+		const { data }: AxiosResponse = await customAxios.delete(url);
 		return data;
 	} catch (error) {
 		throw error;

@@ -1,0 +1,24 @@
+.TagItem {
+	position: relative;
+	padding: 5px 8px;
+	border-radius: 10px;
+	margin-right: 0.5rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+	background-color: var(--lighterGray);
+
+	&-Text {
+		color: var(--main);
+		font-size: 18px;
+	}
+
+	&-Close {
+		position: absolute;
+		top: -0.3rem;
+		right: -0.3rem;
+		font-weight: bold;
+		font-size: 18px;
+		color: var(--red);
+		cursor: pointer;
+	}
+}

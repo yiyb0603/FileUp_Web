@@ -3,6 +3,7 @@ import InitialStore from './Initial';
 import PostStore from './Post';
 import CategoryStore from './Category';
 import UserStore from './User';
+import CommentStore from './Comment';
 
 export interface IStoreType {
   store: {
@@ -11,7 +12,8 @@ export interface IStoreType {
     PostStore: typeof PostStore,
     CategoryStore: typeof CategoryStore,
     UserStore: typeof UserStore,
-  }
+    CommentStore: typeof CommentStore,
+  };
 }
 
 const stores = {
@@ -20,6 +22,7 @@ const stores = {
   PostStore,
   CategoryStore,
   UserStore,
+  CommentStore,
 };
 
 export default stores;

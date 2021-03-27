@@ -1,15 +1,16 @@
 import React, {
   ChangeEvent,
+  KeyboardEvent,
   MutableRefObject,
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import { History } from 'history';
-import PostForm from 'components/Post/PostForm';
+import PostForm from 'components/PostForm';
 import useStores from 'lib/hooks/useStores';
 import groupingState from 'converter/GroupingState';
 import { IError, IPostSuccessRes } from 'util/types/Response';
@@ -32,6 +33,9 @@ const PostFormContainer = observer((): JSX.Element => {
   const [content, setContent] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [files, setFiles] = useState<ISelectFile[]>([]);
+  
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState<string>('');
 
   const onChangeTitle = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
@@ -62,7 +66,7 @@ const PostFormContainer = observer((): JSX.Element => {
         ...tempFiles,
         {
           id: fileId.current++,
-          object: file,
+          file,
         }
       ];
     }
@@ -71,8 +75,26 @@ const PostFormContainer = observer((): JSX.Element => {
   }, [files]);
 
   const handleFilterFile = useCallback((id: number): void => {
-    setFiles(files.filter((file: ISelectFile) => file.id !== id));
-  }, [files]);
+    setFiles((files) => files.filter((file: ISelectFile) => file.id !== id));
+  }, []);
+
+  const onChangeTagInput = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setTagInput(value);
+  }, []);
+
+  const onKeydownTagInput = useCallback((e: KeyboardEvent<HTMLInputElement>): void => {
+    const { key } = e;
+
+    if (key === 'Enter' || key === ',') {
+      setTags((tags: string[]) => [...tags, tagInput]);
+      setTagInput('');
+    }
+  }, [tagInput]);
+
+  const handleFilterTag = useCallback((paramTag: string): void => {
+    setTags((tags: string[]) => tags.filter((tag: string) => tag !== paramTag));
+  }, []);
 
   const requestWritePost = useCallback(async (): Promise<void> => {
     if (!postWriteValidation({ title, content, category })) {
@@ -80,12 +102,16 @@ const PostFormContainer = observer((): JSX.Element => {
     }
 
     const formData: FormData = new FormData();
-    formData.append("post.title", title);
-    formData.append("post.content", content);
-    formData.append("post.category.name", category);
+    formData.append('post.title', title);
+    formData.append('post.content', content);
+    formData.append('post.category.name', category);
+
+    for (const tag of tags) {
+      formData.append('tags', tag);
+    }
     
-    for (const { object } of files) {
-      formData.append('file', object);
+    for (const { file } of files) {
+      formData.append('files', file);
     }
 
     await handleWritePost(formData)
@@ -101,7 +127,7 @@ const PostFormContainer = observer((): JSX.Element => {
     .catch((error: IError) => {
       console.log(error);
     });
-  }, [category, content, files, handleWritePost, history, title]);
+  }, [category, content, files, handleWritePost, history, tags, title]);
 
   const handleDragIn = useCallback((e: DragEvent): void => {
     e.preventDefault(); 
@@ -171,6 +197,10 @@ const PostFormContainer = observer((): JSX.Element => {
       filesObject={groupingState('files', files, onChangeFiles)}
       categoryList={categoryList}
       handleFilterFile={handleFilterFile}
+      tags={tags}
+      tagInputObject={groupingState('tagInput', tagInput, onChangeTagInput)}
+      onKeydownTagInput={onKeydownTagInput}
+      handleFilterTag={handleFilterTag}
       requestWritePost={requestWritePost}
     />
   );

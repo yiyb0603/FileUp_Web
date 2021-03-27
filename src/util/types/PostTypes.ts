@@ -11,14 +11,11 @@ export interface ParamTypes {
 
 export interface ISelectFile {
   id: number;
-  object: File;
+  file: File;
 }
 
 export interface IPostList extends IResponse {
-  object: {
-    maxPage: number;
-    posts: IPostView[];
-  }
+  object: IPostView[];
 };
 
 export interface IPostViewRes extends IResponse {
@@ -38,6 +35,7 @@ export interface IPostViewResObj {
   comments: ICommentType[];
   author: IUserTypes;
   files: IFileType[];
+  tags: ITagType[];
 }
 
 export interface IPostView extends IResponse {
@@ -53,3 +51,8 @@ export interface IPostView extends IResponse {
   created: Date | string;
   updated: Date | string | null;
 };
+
+export interface ITagType {
+  id: number;
+  name: string;
+}

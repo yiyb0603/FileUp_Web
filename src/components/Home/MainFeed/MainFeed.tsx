@@ -4,6 +4,7 @@ import { ClassNamesFn } from 'classnames/types';
 import { IPostView } from 'util/types/PostTypes';
 import HomeLoading from 'components/Common/Loading/HomeLoading';
 import FeedItem from 'components/Common/Post/FeedItem';
+import NoPosts from 'components/Common/NoPosts';
 
 const style = require('./MainFeed.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -19,7 +20,7 @@ const MainFeed = ({ isLoading, postList }: PropTypes): JSX.Element => {
       {
         isLoading ? <HomeLoading />
         :
-        postList.map((post: IPostView, idx: number) => {
+        postList.length > 0 ? postList.map((post: IPostView, idx: number) => {
           return (
             <FeedItem
               key={post.id}
@@ -27,7 +28,7 @@ const MainFeed = ({ isLoading, postList }: PropTypes): JSX.Element => {
               style={idx === 0 ? { borderTop: 'none' } : {}}
             />
           );
-        })
+        }) : <NoPosts />
       }
     </div>
   );

@@ -7,6 +7,8 @@ import { IFileType } from 'util/types/FileTypes';
 import PostInfo from 'components/Common/Post/PostInfo';
 import CommentTemplate from './Comment/CommentTemplate';
 import PostFile from 'components/Common/Post/PostFile';
+import TagItem from 'components/Common/Post/TagItem';
+import TagList from './TagList';
 
 const style = require('./Post.scss');
 const cx: ClassNamesFn = classNames.bind(style);
@@ -16,7 +18,7 @@ interface PropTypes {
 };
 
 const Post = ({ postInfo }: PropTypes): JSX.Element => {
-  const { id, category, title, content, created, updated, preview, view, like, comments, author, files } = postInfo;
+  const { id, category, title, content, created, updated, tags, preview, view, like, comments, author, files } = postInfo;
   const { nickname, code } = author;
 
   return (
@@ -25,6 +27,8 @@ const Post = ({ postInfo }: PropTypes): JSX.Element => {
         <div className={cx('Post-Top-Title')}>{title}</div>
         <OptionMenus direction='bottom' />
       </div>
+
+      <TagList tags={tags} />
 
       <div className={cx('Post-Contents')}>
         <img

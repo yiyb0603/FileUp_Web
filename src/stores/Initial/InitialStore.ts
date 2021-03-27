@@ -1,5 +1,5 @@
-import { autobind } from "core-decorators";
-import { observable } from "mobx";
+import { autobind } from 'core-decorators';
+import { observable } from 'mobx';
 
 @autobind
 class InitialStore {
