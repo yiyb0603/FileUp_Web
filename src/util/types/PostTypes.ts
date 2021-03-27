@@ -35,6 +35,7 @@ export interface IPostViewResObj {
   comments: ICommentType[];
   author: IUserTypes;
   files: IFileType[];
+  tags: ITagType[];
 }
 
 export interface IPostView extends IResponse {
@@ -50,3 +51,8 @@ export interface IPostView extends IResponse {
   created: Date | string;
   updated: Date | string | null;
 };
+
+export interface ITagType {
+  id: number;
+  name: string;
+}

@@ -10,7 +10,7 @@ import React, {
 import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import { History } from 'history';
-import PostForm from 'components/Post/PostForm';
+import PostForm from 'components/PostForm';
 import useStores from 'lib/hooks/useStores';
 import groupingState from 'converter/GroupingState';
 import { IError, IPostSuccessRes } from 'util/types/Response';
