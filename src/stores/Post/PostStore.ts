@@ -2,7 +2,6 @@ import { autobind } from 'core-decorators';
 import { getResponse, postRequest } from 'lib/Axios';
 import { action, observable } from 'mobx';
 import InitialStore from 'stores/Initial';
-import { getToken } from 'util/Token';
 import { IPostList, IPostView, IPostViewRes, IPostViewResObj } from 'util/types/PostTypes';
 import { IPostSuccessRes } from 'util/types/Response';
 
@@ -17,7 +16,7 @@ class PostStore extends InitialStore {
   public handleWritePost = async (request: FormData): Promise<IPostSuccessRes> => {
     try {
       this.isLoading = true;
-      const response: IPostSuccessRes = await postRequest('/posts/upload', request, getToken());
+      const response: IPostSuccessRes = await postRequest('/posts/upload', request);
       this.isLoading = false;
 
       return response;
@@ -34,9 +33,8 @@ class PostStore extends InitialStore {
       this.isLoading = true;
       const response: IPostList = await getResponse(`/posts/${this.count}`);
 
-      const { maxPage } = response.object;
-      const { posts } = response.object;
-      this.maxCount = maxPage;
+      this.maxCount = 10;
+      const posts: IPostView[] = response.object;
 
       if (this.count === 0) {
         this.postList = posts;
@@ -54,7 +52,7 @@ class PostStore extends InitialStore {
   public handleGetPost = async (idx: number): Promise<void> => {
     try {
       this.isLoading = true;
-      const response: IPostViewRes = await getResponse(`/posts/data/${idx}`, getToken());
+      const response: IPostViewRes = await getResponse(`/posts/data/${idx}`);
       const { object } = response;
 
       this.postInfo = object;

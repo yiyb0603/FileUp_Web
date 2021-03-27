@@ -15,10 +15,7 @@ export interface ISelectFile {
 }
 
 export interface IPostList extends IResponse {
-  object: {
-    maxPage: number;
-    posts: IPostView[];
-  }
+  object: IPostView[];
 };
 
 export interface IPostViewRes extends IResponse {

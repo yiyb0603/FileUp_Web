@@ -20,7 +20,7 @@ const MainFeed = ({ isLoading, postList }: PropTypes): JSX.Element => {
       {
         isLoading ? <HomeLoading />
         :
-        postList && postList.length > 0 ? postList.map((post: IPostView, idx: number) => {
+        postList.length > 0 ? postList.map((post: IPostView, idx: number) => {
           return (
             <FeedItem
               key={post.id}

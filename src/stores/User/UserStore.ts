@@ -1,6 +1,6 @@
-import InitialStore from 'stores/Initial';
 import { autobind } from 'core-decorators';
 import { action, observable } from 'mobx';
+import InitialStore from 'stores/Initial';
 import { getResponse } from 'lib/Axios';
 import { IUserResponse, IUserResponseInfo } from 'util/types/UserTypes';
 import { IPostView } from 'util/types/PostTypes';
